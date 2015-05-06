@@ -22,3 +22,5 @@ Show an image with a local image placeholder
 ```
 LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName")
 ```
+###License
+Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
