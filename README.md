@@ -20,5 +20,5 @@ LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.p
 
 Show an image with a local image placeholder
 ```
-LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png", defaultImage:"default")
+LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName")
 ```
