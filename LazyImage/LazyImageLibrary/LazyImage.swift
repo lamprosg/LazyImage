@@ -43,6 +43,19 @@ class LazyImage: NSObject {
         var imageExists:Bool = NSFileManager.defaultManager().fileExistsAtPath(imagePath)
         
         if imageExists {
+            
+            //check if imageview size is 0
+            var width:CGFloat = imageView.bounds.size.width;
+            var height:CGFloat = imageView.bounds.size.height;
+            
+            //In case of default cell images (Dimensions are 0 when not present)
+            if height == 0 && width == 0 {
+                
+                var frame:CGRect = imageView.frame
+                frame.size.width = 40
+                frame.size.height = 40
+                imageView.frame = frame
+            }
 
             if let imageData: AnyObject = NSData(contentsOfFile:imagePath) {
                 //Image exists
@@ -94,15 +107,19 @@ class LazyImage: NSObject {
         //Image path
         var imagePath:String = String(format:"%@/%@", NSTemporaryDirectory(), imgName)
         
-        //Lazy load image (Asychronous call)
         var width:CGFloat = imageView.bounds.size.width;
         var height:CGFloat = imageView.bounds.size.height;
         
         //In case of default cell images (Dimensions are 0 when not present)
         if height == 0 && width == 0 {
-            width = 40;
-            height = 40;
+            
+            var frame:CGRect = imageView.frame
+            frame.size.width = 40
+            frame.size.height = 40
+            imageView.frame = frame
         }
+        
+        //Lazy load image (Asychronous call)
         var urlObject:NSURL = NSURL(string:url!)!
         var urlRequest:NSURLRequest = NSURLRequest(URL: urlObject)
         
