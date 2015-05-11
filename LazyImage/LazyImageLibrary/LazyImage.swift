@@ -266,8 +266,4 @@ class LazyImage: NSObject {
         imageView.addSubview(blurView)
     }
     
-    class func removeBlurFromImageView(imageView:UIImageView) -> Void {
-        
-    }
-    
 }
