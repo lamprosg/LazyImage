@@ -28,5 +28,11 @@ class ViewController: UIViewController {
         
         LazyImage.showForImageView(self.imageView, url: "http://images2.fanpop.com/image/photos/13200000/Tigers-the-animal-kingdom-13288069-1600-1200.jpg")
     }
+    
+    
+    @IBAction func zoomImage(sender: AnyObject) {
+        
+        LazyImage.zoomImageView(self.imageView)
+    }
 }
 
