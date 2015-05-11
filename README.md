@@ -9,7 +9,8 @@ Version 1.2
 * Disables imageView's user interaction until the image is loaded successfully in order to prevent possible gesture recognizer malfunctions
 * Offers the possibility to set a local project image as a placeholder until the actual image is available
 * If the imageView's size is 0, it sets dimensions to 40x40 prior to the request. This applies to the default UITableViewCells due to the fact when no initial image is present, the imageView is hidden.
-* Full screen image zoom
+* Image can be zoomed to full screen
+* Image can be blurred
 
 
 ### Usage
@@ -28,6 +29,11 @@ LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.p
 Zoom the image
 ```
 LazyImage.zoomImageView(self.imageView)
+```
+
+Blur the image
+```
+LazyImage.blurImageView(self.imageView, style: UIBlurEffectStyle.Light)
 ```
 ###License
 Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
