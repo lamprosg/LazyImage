@@ -1,7 +1,7 @@
 ### LazyImage
 Simple and efficient image lazy loading functionality for the iOS written in Swift
 
-Version 1.1
+Version 1.2
 
 ### Features
 * Makes asynchronous call to fetch the image from a url string
@@ -9,6 +9,7 @@ Version 1.1
 * Disables imageView's user interaction until the image is loaded successfully in order to prevent possible gesture recognizer malfunctions
 * Offers the possibility to set a local project image as a placeholder until the actual image is available
 * If the imageView's size is 0, it sets dimensions to 40x40 prior to the request. This applies to the default UITableViewCells due to the fact when no initial image is present, the imageView is hidden.
+* Full screen image zoom
 
 
 ### Usage
@@ -22,6 +23,11 @@ LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.p
 Show an image with a local image placeholder
 ```
 LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName")
+```
+
+Zoom the image
+```
+LazyImage.zoomImageView(self.imageView)
 ```
 ###License
 Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
