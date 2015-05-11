@@ -34,5 +34,11 @@ class ViewController: UIViewController {
         
         LazyImage.zoomImageView(self.imageView)
     }
+    
+    
+    @IBAction func blurImage(sender: AnyObject) {
+        
+        LazyImage.blurImageView(self.imageView, style: UIBlurEffectStyle.Light)
+    }
 }
 

@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>ABD17CC9-3973-4260-BE0B-C030867B23AA</string>
 	<key>IDESourceControlProjectName</key>
-	<string>LazyImage</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>3D80A01523F84828923BCD29D082377DDDE02514</key>
 		<string>https://github.com/lamprosg/LazyImage.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>LazyImage.xcodeproj</string>
+	<string>LazyImage.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>3D80A01523F84828923BCD29D082377DDDE02514</key>

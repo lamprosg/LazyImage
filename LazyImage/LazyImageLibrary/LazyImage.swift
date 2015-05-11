@@ -18,7 +18,7 @@ class LazyImage: NSObject {
     static var backgroundView:UIView = UIView()
     static var oldFrame:CGRect = CGRect()
     
-    // MARK: Image lazy loading
+    //MARK: Image lazy loading
     
     class func showForImageView(imageView:UIImageView, url:String?) -> Void {
         self.showForImageView(imageView, url: url, defaultImage: nil)
@@ -30,6 +30,9 @@ class LazyImage: NSObject {
         if url == nil {
             return //URL is null, don't proceed
         }
+        
+        //Clip subviews for image view
+        imageView.clipsToBounds = true;
         
         var isUserInteractionEnabled:Bool = false
         
@@ -169,7 +172,7 @@ class LazyImage: NSObject {
     
     
     /****************************************************/
-    // MARK: Zoom functionality
+    //MARK: Zoom functionality
     
     class func zoomImageView(imageView:UIImageView) -> Void {
         
@@ -177,6 +180,8 @@ class LazyImage: NSObject {
             return  //No image loaded return
         }
         
+        //Clip subviews for image view
+        imageView.clipsToBounds = true;
         
         var orientation:UIInterfaceOrientation = UIApplication.sharedApplication().statusBarOrientation
         
@@ -240,6 +245,29 @@ class LazyImage: NSObject {
             completion: {(value: Bool) in
                 self.backgroundView.removeFromSuperview()
         })
+    }
+    
+    
+    /****************************************************/
+    //MARK: Blur
+    
+    class func blurImageView(imageView:UIImageView, style:UIBlurEffectStyle) -> Void {
+        
+        if imageView.image == nil {
+            return  //No image loaded return
+        }
+        
+        //Clip subviews for image view
+        imageView.clipsToBounds = true;
+        
+        let blurEffect = UIBlurEffect(style:style)              //UIBlurEffectStyle.Dark etc..
+        var blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = imageView.bounds
+        imageView.addSubview(blurView)
+    }
+    
+    class func removeBlurFromImageView(imageView:UIImageView) -> Void {
+        
     }
     
 }
