@@ -31,7 +31,7 @@ Zoom the image
 LazyImage.zoomImageView(self.imageView)
 ```
 
-Blur the image
+Blur the image (iOS8 and above)
 ```
 LazyImage.blurImageView(self.imageView, style: UIBlurEffectStyle.Light)
 ```
