@@ -16,22 +16,42 @@ Version 1.3
 ### Usage
 Find the LazyImage.swift file and copy it to your Swift project.
 
-Show an image on an imageView
+#### Show an image on an imageView
+
+Without completion
 ```
 LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png")
 ```
 
-Show an image with a local image placeholder
+With completion
+```
+LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png") {
+    () in
+    //Image loading finished. Do something..
+}
+```
+
+#### Show an image with a local image placeholder
+
+Without completion
 ```
 LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName")
 ```
 
-Zoom the image
+With completion
+```
+LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName") {
+    () in
+    //Image loading finished. Do something..
+}
+```
+
+#### Zoom the image
 ```
 LazyImage.zoomImageView(self.imageView)
 ```
 
-Blur the image (iOS8 and above)
+#### Blur the image (iOS 8 and above)
 ```
 LazyImage.blurImageView(self.imageView, style: UIBlurEffectStyle.Light)
 ```
