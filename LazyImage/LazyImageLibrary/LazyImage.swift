@@ -7,7 +7,7 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 1.3
+//  Version 1.4
 
 
 import Foundation
@@ -20,12 +20,30 @@ class LazyImage: NSObject {
     
     //MARK: Image lazy loading
     
+    
+    //MARK: Image lazy loading without completion
+    
     class func showForImageView(imageView:UIImageView, url:String?) -> Void {
-        self.showForImageView(imageView, url: url, defaultImage: nil)
+        self.showForImageView(imageView, url: url, defaultImage: nil) {}
+    }
+    
+    class func showForImageView(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
+        self.showForImageView(imageView, url: url, defaultImage: defaultImage) {}
     }
     
     
-    class func showForImageView(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
+    //MARK: Image lazy loading with completion
+    
+    class func showForImageView(imageView:UIImageView, url:String?, completion: () -> Void) -> Void {
+        self.showForImageView(imageView, url: url, defaultImage: nil) {
+            
+            //Call completion block
+            completion()
+        }
+    }
+    
+    
+    class func showForImageView(imageView:UIImageView, url:String?, defaultImage:String?, completion: () -> Void) -> Void {
         
         if url == nil {
             return //URL is null, don't proceed
@@ -79,6 +97,9 @@ class LazyImage: NSObject {
                 if isUserInteractionEnabled {
                     imageView.userInteractionEnabled = true;
                 }
+                
+                //Completion
+                completion()
             }
             else {
                 //Image exists but corrupted. Load it again
@@ -90,7 +111,11 @@ class LazyImage: NSObject {
                 }
                 
                 //Lazy load image (Asychronous call)
-                self.lazyLoadImage(imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled)
+                self.lazyLoadImage(imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled){
+                    
+                    //Call completion block
+                    completion()
+                }
             }
         }
         else
@@ -104,13 +129,17 @@ class LazyImage: NSObject {
             }
             
             //Lazy load image (Asychronous call)
-            self.lazyLoadImage(imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled)
+            self.lazyLoadImage(imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled){
+                
+                //Completion block reference
+                completion()
+            }
             
         }
     }
     
     
-    class private func lazyLoadImage(imageView:UIImageView, url:String?, isUserInteractionEnabled:Bool) -> Void {
+    class private func lazyLoadImage(imageView:UIImageView, url:String?, isUserInteractionEnabled:Bool, completion: () -> Void) -> Void {
         
         //Remove all "/" from the url because it will be used as the entire file name in order to be unique
         var imgName:String = url!.stringByReplacingOccurrencesOfString("/", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
@@ -163,6 +192,9 @@ class LazyImage: NSObject {
                         if isUserInteractionEnabled {
                             imageView.userInteractionEnabled = true;
                         }
+                        
+                        //Completion block
+                        completion()
                     }
                 })
             }
