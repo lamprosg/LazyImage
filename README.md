@@ -27,7 +27,7 @@ With completion closure
 ```
 LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png") {
     () in
-    //Image loading finished. Do something..
+    //Image loaded. Do something..
 }
 ```
 
@@ -42,7 +42,7 @@ With completion closure
 ```
 LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName") {
     () in
-    //Image loading finished. Do something..
+    //Image loaded. Do something..
 }
 ```
 
