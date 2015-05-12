@@ -18,12 +18,12 @@ Find the LazyImage.swift file and copy it to your Swift project.
 
 #### Show an image on an imageView
 
-Without completion
+Without completion closure
 ```
 LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png")
 ```
 
-With completion
+With completion closure
 ```
 LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png") {
     () in
@@ -33,12 +33,12 @@ LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.p
 
 #### Show an image with a local image placeholder
 
-Without completion
+Without completion closure
 ```
 LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName")
 ```
 
-With completion
+With completion closure
 ```
 LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName") {
     () in
