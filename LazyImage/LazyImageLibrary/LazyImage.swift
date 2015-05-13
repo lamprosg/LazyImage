@@ -18,8 +18,8 @@ class LazyImage: NSObject {
     static var backgroundView:UIView = UIView()
     static var oldFrame:CGRect = CGRect()
     
-    //MARK: Image lazy loading
     
+    //MARK: - Image lazy loading
     
     //MARK: Image lazy loading without completion
     
@@ -204,7 +204,7 @@ class LazyImage: NSObject {
     
     
     /****************************************************/
-    //MARK: Zoom functionality
+    //MARK: - Zoom functionality
     
     class func zoomImageView(imageView:UIImageView) -> Void {
         
@@ -281,7 +281,7 @@ class LazyImage: NSObject {
     
     
     /****************************************************/
-    //MARK: Blur
+    //MARK: - Blur
     
     class func blurImageView(imageView:UIImageView, style:UIBlurEffectStyle) -> Void {
         

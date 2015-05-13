@@ -29,7 +29,6 @@ class ViewController: UIViewController {
         LazyImage.showForImageView(self.imageView, url: "http://images2.fanpop.com/image/photos/13200000/Tigers-the-animal-kingdom-13288069-1600-1200.jpg") {
             () in
             //Lazy loading complete. Do something..
-            LazyImage.blurImageView(self.imageView, style: UIBlurEffectStyle.Light)
         }
     }
     
