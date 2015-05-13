@@ -15,7 +15,7 @@ import UIKit
 
 class LazyImage: NSObject {
     
-    static var backgroundView:UIView = UIView()
+    static var backgroundView:UIView?
     static var oldFrame:CGRect = CGRect()
     
     
@@ -212,6 +212,8 @@ class LazyImage: NSObject {
             return  //No image loaded return
         }
         
+        backgroundView = UIView()
+        
         //Clip subviews for image view
         imageView.clipsToBounds = true;
         
@@ -238,32 +240,35 @@ class LazyImage: NSObject {
         oldFrame = imageView.convertRect(imageView.bounds, toView:window)
         
         
-        backgroundView.backgroundColor=UIColor.blackColor()
-        backgroundView.alpha=0;
+        backgroundView!.backgroundColor=UIColor.blackColor()
+        backgroundView!.alpha=0;
         
         var imgV:UIImageView = UIImageView(frame:oldFrame)
         imgV.image=image;
         imgV.tag=1;
         
-        backgroundView.addSubview(imgV)
+        backgroundView!.addSubview(imgV)
         
-        window.subviews[0].addSubview(backgroundView)
+        window.subviews[0].addSubview(backgroundView!)
         
-        var tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:"hideImage:")
-        backgroundView.addGestureRecognizer(tap)
+        var tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:"zoomOutImageView:")
+        backgroundView!.addGestureRecognizer(tap)
         
         UIView.animateWithDuration(0.3, animations: {
             imgV.frame=CGRectMake(0,(screenBounds.size.height-image.size.height*screenBounds.size.width/image.size.width)/2, screenBounds.size.width, image.size.height*screenBounds.size.width/image.size.width)
-            self.backgroundView.alpha=1;
+            self.backgroundView!.alpha=1;
             },
             completion: {(value: Bool) in
                 UIApplication.sharedApplication().statusBarHidden = true
+                
+                //Track when device is rotated so we can remove the zoomed view
+                NSNotificationCenter.defaultCenter().addObserver(self, selector:"rotated", name: UIDeviceOrientationDidChangeNotification, object: nil)
         })
     }
+
     
     
-    
-    class func hideImage(tap:UITapGestureRecognizer) -> Void {
+    class func zoomOutImageView(tap:UITapGestureRecognizer) -> Void {
     
         UIApplication.sharedApplication().statusBarHidden = false
         
@@ -272,11 +277,47 @@ class LazyImage: NSObject {
         
         UIView.animateWithDuration(0.3, animations: {
             imgV.frame = self.oldFrame
-            self.backgroundView.alpha=0
+            self.backgroundView!.alpha=0
             },
             completion: {(value: Bool) in
-                self.backgroundView.removeFromSuperview()
+                self.backgroundView!.removeFromSuperview()
+                self.backgroundView = nil
         })
+    }
+    
+    
+    
+    class func rotated()
+    {
+        self.removeZoomedImageView()
+        
+        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation))
+        {
+            //println("landscape")
+        }
+        
+        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation))
+        {
+            //println("Portrait")
+        }
+        
+    }
+    
+    
+    class func removeZoomedImageView() -> Void {
+        
+        UIApplication.sharedApplication().statusBarHidden = false
+        
+        if let bgView = self.backgroundView {
+        
+            UIView.animateWithDuration(0.3, animations: {
+                    bgView.alpha=0
+                },
+                completion: {(value: Bool) in
+                    bgView.removeFromSuperview()
+                    self.backgroundView = nil
+            })
+        }
     }
     
     
