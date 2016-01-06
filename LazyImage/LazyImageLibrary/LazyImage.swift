@@ -170,7 +170,7 @@ class LazyImage: NSObject {
             
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) {(response, data, error) in
                 
-                var image:UIImage? = UIImage(data:data)
+                var image:UIImage? = UIImage(data:data!)
                 
                 //Go to main thread and update the UI
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -183,7 +183,7 @@ class LazyImage: NSObject {
                         var error: NSError?
                         
                         do {
-                            try UIImagePNGRepresentation(img).writeToFile(imagePath, options: [])
+                            try UIImagePNGRepresentation(img)!.writeToFile(imagePath, options: [])
                         } catch var error1 as NSError {
                             error = error1
                             if let actualError = error {
