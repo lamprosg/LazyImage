@@ -142,13 +142,13 @@ class LazyImage: NSObject {
     class private func lazyLoadImage(imageView:UIImageView, url:String?, isUserInteractionEnabled:Bool, completion: () -> Void) -> Void {
         
         //Remove all "/" from the url because it will be used as the entire file name in order to be unique
-        var imgName:String = url!.stringByReplacingOccurrencesOfString("/", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let imgName:String = url!.stringByReplacingOccurrencesOfString("/", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         //Image path
-        var imagePath:String = String(format:"%@/%@", NSTemporaryDirectory(), imgName)
+        let imagePath:String = String(format:"%@/%@", NSTemporaryDirectory(), imgName)
         
-        var width:CGFloat = imageView.bounds.size.width;
-        var height:CGFloat = imageView.bounds.size.height;
+        let width:CGFloat = imageView.bounds.size.width;
+        let height:CGFloat = imageView.bounds.size.height;
         
         //In case of default cell images (Dimensions are 0 when not present)
         if height == 0 && width == 0 {
@@ -160,8 +160,8 @@ class LazyImage: NSObject {
         }
         
         //Lazy load image (Asychronous call)
-        var urlObject:NSURL = NSURL(string:url!)!
-        var urlRequest:NSURLRequest = NSURLRequest(URL: urlObject)
+        let urlObject:NSURL = NSURL(string:url!)!
+        let urlRequest:NSURLRequest = NSURLRequest(URL: urlObject)
         
         let qualityOfServiceClass = DISPATCH_QUEUE_PRIORITY_HIGH
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
@@ -170,7 +170,7 @@ class LazyImage: NSObject {
             
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) {(response, data, error) in
                 
-                var image:UIImage? = UIImage(data:data!)
+                let image:UIImage? = UIImage(data:data!)
                 
                 //Go to main thread and update the UI
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -184,7 +184,7 @@ class LazyImage: NSObject {
                         
                         do {
                             try UIImagePNGRepresentation(img)!.writeToFile(imagePath, options: [])
-                        } catch var error1 as NSError {
+                        } catch let error1 as NSError {
                             error = error1
                             if let actualError = error {
                                 NSLog("Image not saved. \(actualError)")
@@ -277,7 +277,6 @@ class LazyImage: NSObject {
     
         UIApplication.sharedApplication().statusBarHidden = false
         
-        var bgView:UIView = tap.view!
         let imgV:UIImageView = tap.view?.viewWithTag(1) as! UIImageView
         
         UIView.animateWithDuration(0.3, animations: {
