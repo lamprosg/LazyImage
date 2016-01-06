@@ -63,19 +63,19 @@ class LazyImage: NSObject {
         }
         
         //Remove all "/" from the url because it will be used as the entire file name in order to be unique
-        var imgName:String = url!.stringByReplacingOccurrencesOfString("/", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let imgName:String = url!.stringByReplacingOccurrencesOfString("/", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         //Image path
-        var imagePath:String = String(format:"%@/%@", NSTemporaryDirectory(), imgName)
+        let imagePath:String = String(format:"%@/%@", NSTemporaryDirectory(), imgName)
         
         //Check if image exists
-        var imageExists:Bool = NSFileManager.defaultManager().fileExistsAtPath(imagePath)
+        let imageExists:Bool = NSFileManager.defaultManager().fileExistsAtPath(imagePath)
         
         if imageExists {
             
             //check if imageview size is 0
-            var width:CGFloat = imageView.bounds.size.width;
-            var height:CGFloat = imageView.bounds.size.height;
+            let width:CGFloat = imageView.bounds.size.width;
+            let height:CGFloat = imageView.bounds.size.height;
             
             //In case of default cell images (Dimensions are 0 when not present)
             if height == 0 && width == 0 {
@@ -88,9 +88,9 @@ class LazyImage: NSObject {
 
             if let imageData: AnyObject = NSData(contentsOfFile:imagePath) {
                 //Image exists
-                var dat:NSData = imageData as! NSData
+                let dat:NSData = imageData as! NSData
                 
-                var image:UIImage = UIImage(data:dat)!
+                let image:UIImage = UIImage(data:dat)!
                 
                 imageView.image = image;
                 
@@ -182,10 +182,15 @@ class LazyImage: NSObject {
                         //Store image to the temporary folder for later use
                         var error: NSError?
                         
-                        if !UIImagePNGRepresentation(img).writeToFile(imagePath, options: nil, error: &error) {
+                        do {
+                            try UIImagePNGRepresentation(img).writeToFile(imagePath, options: [])
+                        } catch var error1 as NSError {
+                            error = error1
                             if let actualError = error {
                                 NSLog("Image not saved. \(actualError)")
                             }
+                        } catch {
+                            fatalError()
                         }
                         
                         //Turn gestures back on
@@ -217,7 +222,7 @@ class LazyImage: NSObject {
         //Clip subviews for image view
         imageView.clipsToBounds = true;
         
-        var orientation:UIInterfaceOrientation = UIApplication.sharedApplication().statusBarOrientation
+        let orientation:UIInterfaceOrientation = UIApplication.sharedApplication().statusBarOrientation
         
         var screenBounds:CGRect = UIScreen.mainScreen().bounds// portrait bounds
         
@@ -230,10 +235,10 @@ class LazyImage: NSObject {
         }
 
         
-        var image:UIImage = imageView.image!
+        let image:UIImage = imageView.image!
         var window:UIWindow = UIApplication.sharedApplication().keyWindow!
 
-        window = UIApplication.sharedApplication().windows[0] as! UIWindow
+        window = UIApplication.sharedApplication().windows[0] 
         
         backgroundView = UIView(frame: CGRectMake(0, 0, screenBounds.size.width, screenBounds.size.height))
         
@@ -243,7 +248,7 @@ class LazyImage: NSObject {
         backgroundView!.backgroundColor=UIColor.blackColor()
         backgroundView!.alpha=0;
         
-        var imgV:UIImageView = UIImageView(frame:oldFrame)
+        let imgV:UIImageView = UIImageView(frame:oldFrame)
         imgV.image=image;
         imgV.tag=1;
         
@@ -251,7 +256,7 @@ class LazyImage: NSObject {
         
         window.subviews[0].addSubview(backgroundView!)
         
-        var tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:"zoomOutImageView:")
+        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:"zoomOutImageView:")
         backgroundView!.addGestureRecognizer(tap)
         
         UIView.animateWithDuration(0.3, animations: {
@@ -273,7 +278,7 @@ class LazyImage: NSObject {
         UIApplication.sharedApplication().statusBarHidden = false
         
         var bgView:UIView = tap.view!
-        var imgV:UIImageView = tap.view?.viewWithTag(1) as! UIImageView
+        let imgV:UIImageView = tap.view?.viewWithTag(1) as! UIImageView
         
         UIView.animateWithDuration(0.3, animations: {
             imgV.frame = self.oldFrame
@@ -334,7 +339,7 @@ class LazyImage: NSObject {
         imageView.clipsToBounds = true;
         
         let blurEffect = UIBlurEffect(style:style)              //UIBlurEffectStyle.Dark etc..
-        var blurView = UIVisualEffectView(effect: blurEffect)
+        let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = imageView.bounds
         imageView.addSubview(blurView)
     }
