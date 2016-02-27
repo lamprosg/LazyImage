@@ -46,7 +46,7 @@ class LazyImage: NSObject {
 
     class func showForImageView(imageView:UIImageView, url:String?, defaultImage:String?, completion: () -> Void) -> Void {
 
-        if url == nil {
+        if url == nil || url!.isEmpty {
             return //URL is null, don't proceed
         }
 
@@ -141,6 +141,10 @@ class LazyImage: NSObject {
 
 
     class private func lazyLoadImage(imageView:UIImageView, url:String?, isUserInteractionEnabled:Bool, completion: () -> Void) -> Void {
+        
+        if url == nil || url!.isEmpty {
+            return //URL is null, don't proceed
+        }
 
         //Remove all "/" from the url because it will be used as the entire file name in order to be unique
         let imgName:String = url!.stringByReplacingOccurrencesOfString("/", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)

@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    
+    @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var imageView: UIImageView!
 
     override func viewDidLoad() {
@@ -23,10 +23,15 @@ class ViewController: UIViewController {
 
     }
 
+    
+    @IBAction func preloadAnImage(sender: AnyObject) {
+        self.textField.text = "http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image5.jpg"
+    }
 
+    
     @IBAction func loadImage(sender: AnyObject) {
         
-        LazyImage.showForImageView(self.imageView, url: "http://images2.fanpop.com/image/photos/13200000/Tigers-the-animal-kingdom-13288069-1600-1200.jpg") {
+        LazyImage.showForImageView(self.imageView, url:self.textField.text!) {
             () in
             //Lazy loading complete. Do something..
         }
