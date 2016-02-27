@@ -7,7 +7,7 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 1.5
+//  Version 1.6
 
 
 import Foundation
@@ -17,7 +17,7 @@ class LazyImage: NSObject {
 
     static var backgroundView:UIView?
     static var oldFrame:CGRect = CGRect()
-    static var hasZoom:Bool = false   // Variable to track whether there is currently a zoomed image
+    static var imageAlreadyZoomed:Bool = false   // Variable to track whether there is currently a zoomed image
 
 
     //MARK: - Image lazy loading
@@ -217,10 +217,10 @@ class LazyImage: NSObject {
         if imageView.image == nil {
             return  //No image loaded return
         }
-        if hasZoom {
+        if imageAlreadyZoomed {
             return  //We already have a zoomed image
         } else {
-            hasZoom = true  //Well, NOW we do
+            imageAlreadyZoomed = true
         }
 
 
@@ -293,7 +293,7 @@ class LazyImage: NSObject {
             completion: {(value: Bool) in
                 self.backgroundView!.removeFromSuperview()
                 self.backgroundView = nil
-                hasZoom = false  //No more zoomed view
+                imageAlreadyZoomed = false  //No more zoomed view
         })
     }
 
@@ -328,7 +328,7 @@ class LazyImage: NSObject {
                 completion: {(value: Bool) in
                     bgView.removeFromSuperview()
                     self.backgroundView = nil
-                    hasZoom = false   //No more zoomed view
+                    imageAlreadyZoomed = false
             })
         }
     }
