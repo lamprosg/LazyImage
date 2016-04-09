@@ -7,7 +7,7 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 1.6
+//  Version 1.7
 
 
 import Foundation
@@ -267,7 +267,7 @@ class LazyImage: NSObject {
 
         window.subviews[0].addSubview(backgroundView!)
 
-        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:"zoomOutImageView:")
+        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(LazyImage.zoomOutImageView(_:)))
         backgroundView!.addGestureRecognizer(tap)
 
         UIView.animateWithDuration(0.3, animations: {
@@ -278,7 +278,7 @@ class LazyImage: NSObject {
                 UIApplication.sharedApplication().statusBarHidden = true
 
                 //Track when device is rotated so we can remove the zoomed view
-                NSNotificationCenter.defaultCenter().addObserver(self, selector:"rotated", name: UIDeviceOrientationDidChangeNotification, object: nil)
+                NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
         })
     }
 
