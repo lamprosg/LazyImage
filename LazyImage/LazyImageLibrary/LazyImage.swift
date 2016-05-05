@@ -7,7 +7,7 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 1.7
+//  Version 1.8
 
 
 import Foundation
@@ -353,6 +353,7 @@ class LazyImage: NSObject {
         let blurEffect = UIBlurEffect(style:style)              //UIBlurEffectStyle.Dark etc..
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = imageView.bounds
+        blurView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         imageView.addSubview(blurView)
     }
     
