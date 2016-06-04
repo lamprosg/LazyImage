@@ -172,9 +172,10 @@ class LazyImage: NSObject {
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
 
         dispatch_async(backgroundQueue, {
-
-            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) {(response, data, error) in
-
+            //Issue #6 - Change to URLSession due to deprecation of NSURLConnection
+            let session:NSURLSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+            let task = session.dataTaskWithRequest(urlRequest) {(data, response, error) in
+            
                 let image:UIImage? = UIImage(data:data!)
 
                 //Go to main thread and update the UI
