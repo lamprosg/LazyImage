@@ -25,7 +25,7 @@ class ViewController: UIViewController {
 
     
     @IBAction func preloadAnImage(sender: AnyObject) {
-        self.textField.text = "http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image5.jpg"
+        self.textField.text = "https://pbs.twimg.com/media/CjfGZJvUoAUSLrx.jpg"
     }
 
     
