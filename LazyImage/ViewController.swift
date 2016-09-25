@@ -24,12 +24,12 @@ class ViewController: UIViewController {
     }
 
     
-    @IBAction func preloadAnImage(sender: AnyObject) {
+    @IBAction func preloadAnImage(_ sender: AnyObject) {
         self.textField.text = "https://pbs.twimg.com/media/CjfGZJvUoAUSLrx.jpg"
     }
 
     
-    @IBAction func loadImage(sender: AnyObject) {
+    @IBAction func loadImage(_ sender: AnyObject) {
         
         LazyImage.showForImageView(self.imageView, url:self.textField.text!) {
             () in
@@ -38,15 +38,15 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func zoomImage(sender: AnyObject) {
+    @IBAction func zoomImage(_ sender: AnyObject) {
         
         LazyImage.zoomImageView(self.imageView)
     }
     
     
-    @IBAction func blurImage(sender: AnyObject) {
+    @IBAction func blurImage(_ sender: AnyObject) {
         
-        LazyImage.blurImageView(self.imageView, style: UIBlurEffectStyle.Light)
+        LazyImage.blurImageView(self.imageView, style: UIBlurEffectStyle.light)
     }
 }
 
