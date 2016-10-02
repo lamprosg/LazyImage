@@ -7,7 +7,7 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 2.0.0
+//  Version 3.0.0
 
 
 import Foundation
@@ -24,19 +24,19 @@ class LazyImage: NSObject {
     
     //MARK: Image lazy loading without completion
     
-    class func showForImageView(_ imageView:UIImageView, url:String?) -> Void {
-        self.showForImageView(imageView, url: url, defaultImage: nil) {}
+    class func show(imageView:UIImageView, url:String?) -> Void {
+        self.show(imageView: imageView, url: url, defaultImage: nil) {}
     }
     
-    class func showForImageView(_ imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
-        self.showForImageView(imageView, url: url, defaultImage: defaultImage) {}
+    class func show(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
+        self.show(imageView: imageView, url: url, defaultImage: defaultImage) {}
     }
     
     
     //MARK: Image lazy loading with completion
     
-    class func showForImageView(_ imageView:UIImageView, url:String?, completion: @escaping () -> Void) -> Void {
-        self.showForImageView(imageView, url: url, defaultImage: nil) {
+    class func show(imageView:UIImageView, url:String?, completion: @escaping () -> Void) -> Void {
+        self.show(imageView: imageView, url: url, defaultImage: nil) {
             
             //Call completion block
             completion()
@@ -44,7 +44,7 @@ class LazyImage: NSObject {
     }
     
     
-    class func showForImageView(_ imageView:UIImageView, url:String?, defaultImage:String?, completion: @escaping () -> Void) -> Void {
+    class func show(imageView:UIImageView, url:String?, defaultImage:String?, completion: @escaping () -> Void) -> Void {
         
         if url == nil || url!.isEmpty {
             return //URL is null, don't proceed
@@ -112,7 +112,7 @@ class LazyImage: NSObject {
                 }
                 
                 //Lazy load image (Asychronous call)
-                self.lazyLoadImage(imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled){
+                self.lazyLoad(imageView: imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled){
                     
                     //Call completion block
                     completion()
@@ -130,7 +130,7 @@ class LazyImage: NSObject {
             }
             
             //Lazy load image (Asychronous call)
-            self.lazyLoadImage(imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled){
+            self.lazyLoad(imageView: imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled){
                 
                 //Completion block reference
                 completion()
@@ -140,7 +140,7 @@ class LazyImage: NSObject {
     }
     
     
-    class fileprivate func lazyLoadImage(_ imageView:UIImageView, url:String?, isUserInteractionEnabled:Bool, completion: @escaping () -> Void) -> Void {
+    class fileprivate func lazyLoad(imageView:UIImageView, url:String?, isUserInteractionEnabled:Bool, completion: @escaping () -> Void) -> Void {
         
         if url == nil || url!.isEmpty {
             return //URL is null, don't proceed
@@ -168,7 +168,7 @@ class LazyImage: NSObject {
         let urlObject:URL = URL(string:url!)!
         let urlRequest:URLRequest = URLRequest(url: urlObject)
         
-        let backgroundQueue = DispatchQueue(label: "imageBackgroundQue",
+        let backgroundQueue = DispatchQueue(label:"imageBackgroundQue",
                                             qos: .background,
                                             target: nil)
         
@@ -235,7 +235,7 @@ class LazyImage: NSObject {
     /****************************************************/
     //MARK: - Zoom functionality
     
-    class func zoomImageView(_ imageView:UIImageView) -> Void {
+    class func zoom(imageView:UIImageView) -> Void {
         
         if imageView.image == nil {
             return  //No image loaded return
@@ -360,10 +360,10 @@ class LazyImage: NSObject {
     /****************************************************/
     //MARK: - Blur
     
-    class func blurImageView(_ imageView:UIImageView, style:UIBlurEffectStyle) -> Void {
+    class func blur(imageView:UIImageView, style:UIBlurEffectStyle) -> UIVisualEffectView? {
         
         if imageView.image == nil {
-            return  //No image loaded return
+            return nil  //No image loaded return
         }
         
         //Clip subviews for image view
@@ -374,6 +374,7 @@ class LazyImage: NSObject {
         blurView.frame = imageView.bounds
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageView.addSubview(blurView)
+        return blurView
     }
     
 }

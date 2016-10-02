@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     
     @IBAction func loadImage(_ sender: AnyObject) {
         
-        LazyImage.showForImageView(self.imageView, url:self.textField.text!) {
+        LazyImage.show(imageView:self.imageView, url:self.textField.text!) {
             () in
             //Lazy loading complete. Do something..
         }
@@ -40,13 +40,13 @@ class ViewController: UIViewController {
     
     @IBAction func zoomImage(_ sender: AnyObject) {
         
-        LazyImage.zoomImageView(self.imageView)
+        LazyImage.zoom(imageView:self.imageView)
     }
     
     
     @IBAction func blurImage(_ sender: AnyObject) {
         
-        LazyImage.blurImageView(self.imageView, style: UIBlurEffectStyle.light)
+        let _ = LazyImage.blur(imageView:self.imageView, style: UIBlurEffectStyle.light)
     }
 }
 
