@@ -1,7 +1,7 @@
 ### LazyImage
 Simple and efficient image lazy loading functionality for the iOS written in Swift
 
-Version 2.0.0
+Version 3.0.0
 
 ### Features
 * Makes asynchronous call to fetch the image from a url string
@@ -21,12 +21,12 @@ Find the LazyImage.swift file and copy it to your Swift project.
 
 Without completion closure
 ```
-LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png")
+LazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png")
 ```
 
 With completion closure
 ```
-LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png") {
+LazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png") {
     () in
     //Image loaded. Do something..
 }
@@ -36,12 +36,12 @@ LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.p
 
 Without completion closure
 ```
-LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName")
+LazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName")
 ```
 
 With completion closure
 ```
-LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName") {
+LazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName") {
     () in
     //Image loaded. Do something..
 }
@@ -49,12 +49,12 @@ LazyImage.showForImageView(self.imageView, url:"http://something.com/someimage.p
 
 #### Zoom the image
 ```
-LazyImage.zoomImageView(self.imageView)
+LazyImage.zoom(imageView:self.imageView)
 ```
 
 #### Blur the image (iOS 8 and above)
 ```
-LazyImage.blurImageView(self.imageView, style: UIBlurEffectStyle.Light)
+LazyImage.blur(imageView:self.imageView, style: UIBlurEffectStyle.Light)
 ```
 ###License
 Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
