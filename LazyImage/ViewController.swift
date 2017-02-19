@@ -12,6 +12,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var imageView: UIImageView!
+    
+    //The lazy image object
+    lazy var lazyImage:LazyImage = LazyImage()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +34,7 @@ class ViewController: UIViewController {
     
     @IBAction func loadImage(_ sender: AnyObject) {
         
-        LazyImage.show(imageView:self.imageView, url:self.textField.text!) {
+        self.lazyImage.show(imageView:self.imageView, url:self.textField.text!) {
             () in
             //Lazy loading complete. Do something..
         }
@@ -40,13 +43,13 @@ class ViewController: UIViewController {
     
     @IBAction func zoomImage(_ sender: AnyObject) {
         
-        LazyImage.zoom(imageView:self.imageView)
+        self.lazyImage.zoom(imageView:self.imageView)
     }
     
     
     @IBAction func blurImage(_ sender: AnyObject) {
         
-        let _ = LazyImage.blur(imageView:self.imageView, style: UIBlurEffectStyle.light)
+        let _ = self.lazyImage.blur(imageView:self.imageView, style: UIBlurEffectStyle.light)
     }
 }
 

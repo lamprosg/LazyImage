@@ -7,7 +7,7 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 3.0.0
+//  Version 4.0.0
 
 
 import Foundation
@@ -15,27 +15,42 @@ import UIKit
 
 class LazyImage: NSObject {
     
-    static var backgroundView:UIView?
-    static var oldFrame:CGRect = CGRect()
-    static var imageAlreadyZoomed:Bool = false   // Variable to track whether there is currently a zoomed image
-    
+    var backgroundView:UIView?
+    var oldFrame:CGRect = CGRect()
+    var imageAlreadyZoomed:Bool = false   // Flag to track whether there is currently a zoomed image
+    var showSpinner:Bool = false          // Flag to track wether to show spinner
+    var spinner:UIActivityIndicatorView?  // Actual spinner
     
     //MARK: - Image lazy loading
     
     //MARK: Image lazy loading without completion
     
-    class func show(imageView:UIImageView, url:String?) -> Void {
+    func show(imageView:UIImageView, url:String?) -> Void {
         self.show(imageView: imageView, url: url, defaultImage: nil) {}
     }
     
-    class func show(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
+    func showWithSpinner(imageView:UIImageView, url:String?) -> Void {
+        self.showSpinner = true
+        self.show(imageView: imageView, url: url, defaultImage: nil) {}
+    }
+    
+    func show(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
         self.show(imageView: imageView, url: url, defaultImage: defaultImage) {}
     }
     
     
     //MARK: Image lazy loading with completion
     
-    class func show(imageView:UIImageView, url:String?, completion: @escaping () -> Void) -> Void {
+    func showWithSpinner(imageView:UIImageView, url:String?, completion: @escaping () -> Void) -> Void {
+        self.showSpinner = true
+        self.show(imageView: imageView, url: url) {
+            
+            //Call completion block
+            completion()
+        }
+    }
+    
+    func show(imageView:UIImageView, url:String?, completion: @escaping () -> Void) -> Void {
         self.show(imageView: imageView, url: url, defaultImage: nil) {
             
             //Call completion block
@@ -44,7 +59,7 @@ class LazyImage: NSObject {
     }
     
     
-    class func show(imageView:UIImageView, url:String?, defaultImage:String?, completion: @escaping () -> Void) -> Void {
+    func show(imageView:UIImageView, url:String?, defaultImage:String?, completion: @escaping () -> Void) -> Void {
         
         if url == nil || url!.isEmpty {
             return //URL is null, don't proceed
@@ -112,7 +127,7 @@ class LazyImage: NSObject {
                 }
                 
                 //Lazy load image (Asychronous call)
-                self.lazyLoad(imageView: imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled){
+                self.lazyLoad(imageView: imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled) {
                     
                     //Call completion block
                     completion()
@@ -126,11 +141,11 @@ class LazyImage: NSObject {
                 imageView.image = UIImage(named:defaultImg)
             }
             else {
-                imageView.image = UIImage(named:"")
+                imageView.image = UIImage(named:"") //Blank
             }
             
             //Lazy load image (Asychronous call)
-            self.lazyLoad(imageView: imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled){
+            self.lazyLoad(imageView: imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled) {
                 
                 //Completion block reference
                 completion()
@@ -140,7 +155,7 @@ class LazyImage: NSObject {
     }
     
     
-    class fileprivate func lazyLoad(imageView:UIImageView, url:String?, isUserInteractionEnabled:Bool, completion: @escaping () -> Void) -> Void {
+    fileprivate func lazyLoad(imageView:UIImageView, url:String?, isUserInteractionEnabled:Bool, completion: @escaping () -> Void) -> Void {
         
         if url == nil || url!.isEmpty {
             return //URL is null, don't proceed
@@ -164,6 +179,11 @@ class LazyImage: NSObject {
             imageView.frame = frame
         }
         
+        //Show spinner
+        if self.showSpinner {
+            self.showActivityIndicatory(view:imageView)
+        }
+        
         //Lazy load image (Asychronous call)
         let urlObject:URL = URL(string:url!)!
         let urlRequest:URLRequest = URLRequest(url: urlObject)
@@ -175,7 +195,7 @@ class LazyImage: NSObject {
         backgroundQueue.async(execute: {
             
             let session:URLSession = URLSession(configuration: URLSessionConfiguration.default)
-            let task = session.dataTask(with: urlRequest, completionHandler: {(data, response, error) in
+            let task = session.dataTask(with: urlRequest, completionHandler: { [weak self] (data, response, error) in
                 
                 if response != nil {
                     let httpResponse:HTTPURLResponse = response as! HTTPURLResponse
@@ -195,36 +215,17 @@ class LazyImage: NSObject {
                 
                 let image:UIImage? = UIImage(data:data!)
                 
-                //Go to main thread and update the UI
-                DispatchQueue.main.async(execute: { () -> Void in
+                if let img = image {
                     
-                    if let img = image {
-                        
-                        imageView.image = img;
-                        
-                        //Store image to the temporary folder for later use
-                        var error: NSError?
-                        
-                        do {
-                            try UIImagePNGRepresentation(img)!.write(to: URL(fileURLWithPath: imagePath), options: [])
-                        } catch let error1 as NSError {
-                            error = error1
-                            if let actualError = error {
-                                NSLog("Image not saved. \(actualError)")
-                            }
-                        } catch {
-                            fatalError()
-                        }
-                        
-                        //Turn gestures back on
-                        if isUserInteractionEnabled {
-                            imageView.isUserInteractionEnabled = true;
-                        }
-                        
-                        //Completion block
-                        completion()
+                    self?.updateImageview(imageView:imageView,
+                                          fetchedImage:img,
+                                          imagePath:imagePath,
+                                          isUserInteractionEnabled:isUserInteractionEnabled) {
+                                            
+                                            //Completion block
+                                            completion()
                     }
-                })
+                }
             })
             task.resume()
         })
@@ -232,10 +233,72 @@ class LazyImage: NSObject {
     
     
     
+    fileprivate func updateImageview(imageView:UIImageView,
+                                     fetchedImage:UIImage,
+                                     imagePath:String,
+                                     isUserInteractionEnabled:Bool,
+                                     completion: @escaping () -> Void) -> Void {
+        
+        //Go to main thread and update the UI
+        DispatchQueue.main.async(execute: { [weak self] () -> Void in
+            
+            //Hide spinner
+            if let _ = self?.showSpinner {
+                self?.removeActivityIndicator()
+                self?.showSpinner = false
+            }
+            
+            imageView.image = fetchedImage;
+            
+            //Store image to the temporary folder for later use
+            var error: NSError?
+            
+            do {
+                try UIImagePNGRepresentation(fetchedImage)!.write(to: URL(fileURLWithPath: imagePath), options: [])
+            } catch let error1 as NSError {
+                error = error1
+                if let actualError = error {
+                    Swift.debugPrint("Image not saved. \(actualError)")
+                }
+            } catch {
+                fatalError()
+            }
+            
+            //Turn gestures back on
+            if isUserInteractionEnabled {
+                imageView.isUserInteractionEnabled = true;
+            }
+            
+            //Completion block
+            completion()
+        })
+    }
+    
+    
+    func showActivityIndicatory(view: UIView) {
+        self.spinner = UIActivityIndicatorView()
+        self.spinner!.frame = view.bounds
+        self.spinner!.hidesWhenStopped = true
+        self.spinner!.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(self.spinner!)
+        self.spinner!.startAnimating()
+    }
+    
+    func removeActivityIndicator() {
+        
+        if let spinner = self.spinner {
+            spinner.stopAnimating()
+            spinner.removeFromSuperview()
+        }
+        //Reset
+        self.spinner = nil
+    }
+    
+    
     /****************************************************/
     //MARK: - Zoom functionality
     
-    class func zoom(imageView:UIImageView) -> Void {
+    func zoom(imageView:UIImageView) -> Void {
         
         if imageView.image == nil {
             return  //No image loaded return
@@ -292,18 +355,18 @@ class LazyImage: NSObject {
         UIView.animate(withDuration: 0.3, animations: {
             imgV.frame=CGRect(x: 0,y: (screenBounds.size.height-image.size.height*screenBounds.size.width/image.size.width)/2, width: screenBounds.size.width, height: image.size.height*screenBounds.size.width/image.size.width)
             self.backgroundView!.alpha=1;
-            },
+        },
                        completion: {(value: Bool) in
                         UIApplication.shared.isStatusBarHidden = true
                         
                         //Track when device is rotated so we can remove the zoomed view
-                        NotificationCenter.default.addObserver(self, selector:#selector(rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+                        NotificationCenter.default.addObserver(self, selector:#selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         })
     }
     
     
     
-    class func zoomOutImageView(_ tap:UITapGestureRecognizer) -> Void {
+    func zoomOutImageView(_ tap:UITapGestureRecognizer) -> Void {
         
         UIApplication.shared.isStatusBarHidden = false
         
@@ -312,17 +375,17 @@ class LazyImage: NSObject {
         UIView.animate(withDuration: 0.3, animations: {
             imgV.frame = self.oldFrame
             self.backgroundView!.alpha=0
-            },
+        },
                        completion: {(value: Bool) in
                         self.backgroundView!.removeFromSuperview()
                         self.backgroundView = nil
-                        imageAlreadyZoomed = false  //No more zoomed view
+                        self.imageAlreadyZoomed = false  //No more zoomed view
         })
     }
     
     
     
-    class func rotated()
+    func rotated()
     {
         self.removeZoomedImageView()
         
@@ -339,7 +402,7 @@ class LazyImage: NSObject {
     }
     
     
-    class func removeZoomedImageView() -> Void {
+    func removeZoomedImageView() -> Void {
         
         UIApplication.shared.isStatusBarHidden = false
         
@@ -347,11 +410,11 @@ class LazyImage: NSObject {
             
             UIView.animate(withDuration: 0.3, animations: {
                 bgView.alpha=0
-                },
+            },
                            completion: {(value: Bool) in
                             bgView.removeFromSuperview()
                             self.backgroundView = nil
-                            imageAlreadyZoomed = false
+                            self.imageAlreadyZoomed = false
             })
         }
     }
@@ -360,7 +423,7 @@ class LazyImage: NSObject {
     /****************************************************/
     //MARK: - Blur
     
-    class func blur(imageView:UIImageView, style:UIBlurEffectStyle) -> UIVisualEffectView? {
+    func blur(imageView:UIImageView, style:UIBlurEffectStyle) -> UIVisualEffectView? {
         
         if imageView.image == nil {
             return nil  //No image loaded return
