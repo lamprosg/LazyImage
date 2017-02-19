@@ -29,9 +29,22 @@ Without completion closure
 self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png")
 ```
 
+Without completion closure - With spinner
+```
+self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png")
+```
+
 With completion closure
 ```
 self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png") {
+    () in
+    //Image loaded. Do something..
+}
+```
+
+With completion closure - With spinner
+```
+self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png") {
     () in
     //Image loaded. Do something..
 }
