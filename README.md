@@ -19,14 +19,19 @@ Find the LazyImage.swift file and copy it to your Swift project.
 
 #### Show an image on an imageView
 
+```
+//The image object
+lazy var lazyImage:LazyImage = LazyImage()
+```
+
 Without completion closure
 ```
-LazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png")
+self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png")
 ```
 
 With completion closure
 ```
-LazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png") {
+self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png") {
     () in
     //Image loaded. Do something..
 }
@@ -36,12 +41,12 @@ LazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png
 
 Without completion closure
 ```
-LazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName")
+self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName")
 ```
 
 With completion closure
 ```
-LazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName") {
+self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName") {
     () in
     //Image loaded. Do something..
 }
@@ -49,12 +54,12 @@ LazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png
 
 #### Zoom the image
 ```
-LazyImage.zoom(imageView:self.imageView)
+self.lazyImage.zoom(imageView:self.imageView)
 ```
 
 #### Blur the image (iOS 8 and above)
 ```
-LazyImage.blur(imageView:self.imageView, style: UIBlurEffectStyle.Light)
+self.lazyImage.blur(imageView:self.imageView, style: UIBlurEffectStyle.Light)
 ```
 ###License
 Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
