@@ -1,7 +1,7 @@
 ### LazyImage
 Simple and efficient image lazy loading functionality for the iOS written in Swift
 
-Version 3.0.0
+Version 4.0.0
 
 ### Features
 * Makes asynchronous call to fetch the image from a url string
