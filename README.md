@@ -28,7 +28,7 @@ Find the LazyImage.swift file and copy it to your Swift project. You're done.
 #### Show an image on an imageView
 
 ```
-//The image object
+//Create a lazy image object that will hold the instance
 lazy var lazyImage:LazyImage = LazyImage()
 ```
 
