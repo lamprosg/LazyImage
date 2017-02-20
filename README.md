@@ -4,18 +4,23 @@ Simple and efficient image lazy loading functionality for the iOS written in Swi
 Version 4.0.0
 
 ### Features
-* Makes asynchronous call to fetch the image from a url string
-* Provides temporary caching of the downloaded images to the NSTemporaryDirectory, uniquely named based on the url string, to prevent unnecessary requests
-* Disables imageView's user interaction until the image is loaded successfully in order to prevent possible gesture recognizer malfunctions
+* Asynchronous image downloader on a background thread. Main thread is never blocked.
+* Temporary caching of the downloaded images with automatic OS clean up
+* Guarantees that the same image url will not be downloaded again but will be fetched from the cache
+* Disables imageView's user interaction until the image is loaded successfully in order to prevent possible developer gesture recognizer issues
 * Offers the possibility to set a local project image as a placeholder until the actual image is available
-* If the imageView's size is 0, it sets dimensions to 40x40 prior to the request. This applies to the default UITableViewCells due to the fact when no initial image is present, the imageView is hidden.
+* Offers the possibility to add a spinner at the center of the imageView until the image is fetched
+* If the imageView's size is 0, it sets dimensions to 40x40 prior to the request. This applies to the default UITableViewCells due to the fact when no initial image is present the imageView is hidden.
 * Image can be zoomed to full screen
 * Image can be blurred
-* Bitcode enabled
 
+
+### Installation
+Currently only manual installation is available (1 file)
+
+Find the LazyImage.swift file and copy it to your Swift project. You're done.
 
 ### Usage
-Find the LazyImage.swift file and copy it to your Swift project.
 
 #### Show an image on an imageView
 
