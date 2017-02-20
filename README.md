@@ -3,6 +3,7 @@ Simple and efficient image lazy loading functionality for the iOS written in Swi
 
 Version 4.0.0
 
+
 ### Features
 * Asynchronous image downloader on a background thread. Main thread is never blocked.
 * Temporary caching of the downloaded images with automatic OS clean up
@@ -15,10 +16,12 @@ Version 4.0.0
 * Image can be blurred
 
 
+
 ### Installation
 Currently only manual installation is available (1 file)
 
 Find the LazyImage.swift file and copy it to your Swift project. You're done.
+
 
 ### Usage
 
