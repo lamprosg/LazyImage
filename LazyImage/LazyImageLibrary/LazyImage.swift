@@ -7,7 +7,7 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 4.0.0
+//  Version 4.0.1
 
 
 import Foundation
@@ -210,6 +210,14 @@ class LazyImage: NSObject {
                         Swift.debugPrint("Error : \(error!.localizedDescription)")
                     }
                     Swift.debugPrint("LazyImage: No image data available")
+                    
+                    //Hide spinner
+                    DispatchQueue.main.async(execute: { [weak self] () -> Void in
+                        if let _ = self?.showSpinner {
+                            self?.removeActivityIndicator()
+                            self?.showSpinner = false
+                        }
+                    })
                     return
                 }
                 
@@ -225,6 +233,18 @@ class LazyImage: NSObject {
                                             //Completion block
                                             completion()
                     }
+                }
+                else {
+                    //Hide spinner
+                    DispatchQueue.main.async(execute: { [weak self] () -> Void in
+                        if let _ = self?.showSpinner {
+                            self?.removeActivityIndicator()
+                            self?.showSpinner = false
+                        }
+                        
+                        //Completion block
+                        completion()
+                    })
                 }
             })
             task.resume()
