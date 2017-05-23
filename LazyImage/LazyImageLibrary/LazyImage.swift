@@ -7,7 +7,7 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 4.0.1
+//  Version 5.0.0
 
 
 import Foundation
@@ -20,6 +20,7 @@ class LazyImage: NSObject {
     var imageAlreadyZoomed:Bool = false   // Flag to track whether there is currently a zoomed image
     var showSpinner:Bool = false          // Flag to track wether to show spinner
     var spinner:UIActivityIndicatorView?  // Actual spinner
+    var desiredImageSize:CGSize?
     
     //MARK: - Image lazy loading
     
@@ -35,6 +36,11 @@ class LazyImage: NSObject {
     }
     
     func show(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
+        self.show(imageView: imageView, url: url, defaultImage: defaultImage) {}
+    }
+    
+    func showWithSpinner(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
+        self.showSpinner = true
         self.show(imageView: imageView, url: url, defaultImage: defaultImage) {}
     }
     
@@ -59,7 +65,33 @@ class LazyImage: NSObject {
     }
     
     
+    //MARK: Image lazy loading with completion and image resizing
+    
+    func showWithSpinner(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping () -> Void) -> Void {
+        self.showSpinner = true
+        self.desiredImageSize = size
+        self.show(imageView: imageView, url: url) {
+            
+            //Call completion block
+            completion()
+        }
+    }
+    
+    func show(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping () -> Void) -> Void {
+        self.desiredImageSize = size
+        self.show(imageView: imageView, url: url, defaultImage: nil) {
+            
+            //Call completion block
+            completion()
+        }
+    }
+    
+    
     func show(imageView:UIImageView, url:String?, defaultImage:String?, completion: @escaping () -> Void) -> Void {
+        
+        if let defaultImg = defaultImage {
+            imageView.image = UIImage(named:defaultImg)
+        }
         
         if url == nil || url!.isEmpty {
             return //URL is null, don't proceed
@@ -67,16 +99,6 @@ class LazyImage: NSObject {
         
         //Clip subviews for image view
         imageView.clipsToBounds = true;
-        
-        var isUserInteractionEnabled:Bool = false
-        
-        //De-activate interactions while loading.
-        //This prevents image gestures not to fire while image is loading.
-        if imageView.isUserInteractionEnabled {
-            
-            isUserInteractionEnabled = imageView.isUserInteractionEnabled
-            imageView.isUserInteractionEnabled = false
-        }
         
         //Remove all "/" from the url because it will be used as the entire file name in order to be unique
         let imgName:String = url!.replacingOccurrences(of: "/", with: "", options: NSString.CompareOptions.literal, range: nil)
@@ -106,13 +128,13 @@ class LazyImage: NSObject {
                 //Image exists
                 let dat:Data = imageData
                 
-                let image:UIImage = UIImage(data:dat)!
+                var image:UIImage = UIImage(data:dat)!
+                
+                if let newSize = self.desiredImageSize {
+                    image = self.resizeImage(image: image, targetSize: newSize)
+                }
                 
                 imageView.image = image;
-                
-                if isUserInteractionEnabled {
-                    imageView.isUserInteractionEnabled = true;
-                }
                 
                 //Completion
                 completion()
@@ -127,7 +149,7 @@ class LazyImage: NSObject {
                 }
                 
                 //Lazy load image (Asychronous call)
-                self.lazyLoad(imageView: imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled) {
+                self.lazyLoad(imageView: imageView, url: url) {
                     
                     //Call completion block
                     completion()
@@ -145,7 +167,7 @@ class LazyImage: NSObject {
             }
             
             //Lazy load image (Asychronous call)
-            self.lazyLoad(imageView: imageView, url: url, isUserInteractionEnabled:isUserInteractionEnabled) {
+            self.lazyLoad(imageView: imageView, url: url) {
                 
                 //Completion block reference
                 completion()
@@ -155,7 +177,7 @@ class LazyImage: NSObject {
     }
     
     
-    fileprivate func lazyLoad(imageView:UIImageView, url:String?, isUserInteractionEnabled:Bool, completion: @escaping () -> Void) -> Void {
+    fileprivate func lazyLoad(imageView:UIImageView, url:String?, completion: @escaping () -> Void) -> Void {
         
         if url == nil || url!.isEmpty {
             return //URL is null, don't proceed
@@ -227,8 +249,7 @@ class LazyImage: NSObject {
                     
                     self?.updateImageview(imageView:imageView,
                                           fetchedImage:img,
-                                          imagePath:imagePath,
-                                          isUserInteractionEnabled:isUserInteractionEnabled) {
+                                          imagePath:imagePath) {
                                             
                                             //Completion block
                                             completion()
@@ -256,11 +277,16 @@ class LazyImage: NSObject {
     fileprivate func updateImageview(imageView:UIImageView,
                                      fetchedImage:UIImage,
                                      imagePath:String,
-                                     isUserInteractionEnabled:Bool,
                                      completion: @escaping () -> Void) -> Void {
         
         //Go to main thread and update the UI
         DispatchQueue.main.async(execute: { [weak self] () -> Void in
+            
+            //Check if we have a new size
+            var image:UIImage? = fetchedImage
+            if let newSize = self?.desiredImageSize {
+                image = self?.resizeImage(image: image!, targetSize: newSize)
+            }
             
             //Hide spinner
             if let _ = self?.showSpinner {
@@ -268,7 +294,7 @@ class LazyImage: NSObject {
                 self?.showSpinner = false
             }
             
-            imageView.image = fetchedImage;
+            imageView.image = image!;
             
             //Store image to the temporary folder for later use
             var error: NSError?
@@ -284,16 +310,14 @@ class LazyImage: NSObject {
                 fatalError()
             }
             
-            //Turn gestures back on
-            if isUserInteractionEnabled {
-                imageView.isUserInteractionEnabled = true;
-            }
-            
             //Completion block
             completion()
         })
     }
     
+    
+    /****************************************************/
+    //MARK: - Show activity indicator
     
     func showActivityIndicatory(view: UIView) {
         self.spinner = UIActivityIndicatorView()
@@ -437,6 +461,25 @@ class LazyImage: NSObject {
                             self.imageAlreadyZoomed = false
             })
         }
+    }
+    
+    
+    /****************************************************/
+    //MARK: - Resize image
+    
+    
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        
+        let horizontalRatio:CGFloat = targetSize.width / image.size.width
+        let verticalRatio:CGFloat = targetSize.height / image.size.height
+        
+        let ratio = max(horizontalRatio, verticalRatio)
+        let newSize = CGSize(width: image.size.width * ratio, height: image.size.height * ratio)
+        UIGraphicsBeginImageContextWithOptions(newSize, true, 0)
+        image.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
     }
     
     
