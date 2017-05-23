@@ -1,7 +1,7 @@
 ### iOS - LazyImage
 Simple and efficient image lazy loading functionality for the iOS written in Swift
 
-Version 4.0.1
+Version 5.0.0
 
 
 ### Features
@@ -53,6 +53,24 @@ self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimag
 With completion closure - With spinner
 ```
 self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png") {
+    () in
+    //Image loaded. Do something..
+}
+```
+
+With completion closure and new scaled size
+```
+let newSize = CGSize(width: newWidth, height: newHeight)
+self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png", size:newSize) {
+    () in
+    //Image loaded. Do something..
+}
+```
+
+With completion closure - With spinner
+```
+let newSize = CGSize(width: newWidth, height: newHeight)
+self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png", size:newSize) {
     () in
     //Image loaded. Do something..
 }
