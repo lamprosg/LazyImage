@@ -29,6 +29,7 @@ Find the LazyImage.swift file and copy it to your Swift project. You're done.
 
 ```
 //Create a lazy image object that will hold the instance
+//It is best that you create one instance per image (maybe in your subclass of your object containing the image)
 lazy var lazyImage:LazyImage = LazyImage()
 ```
 
