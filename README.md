@@ -11,6 +11,7 @@ Version 5.0.0
 * Offers the possibility to set a local project image as a placeholder until the actual image is available
 * Offers the possibility to add a spinner at the center of the imageView until the image is fetched
 * If the imageView's size is 0, it sets dimensions to 40x40 prior to the request. This applies to the default UITableViewCells due to the fact when no initial image is present the imageView is hidden.
+* Image can be scaled to your specific view dimensions for best performance.
 * Image can be zoomed to full screen
 * Image can be blurred
 
