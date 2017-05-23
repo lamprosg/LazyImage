@@ -8,7 +8,6 @@ Version 5.0.0
 * Asynchronous image downloader on a background thread. Main thread is never blocked.
 * Temporary caching of the downloaded images with automatic OS clean up
 * Guarantees that the same image url will not be downloaded again but will be fetched from the cache
-* Disables imageView's user interaction until the image is loaded successfully in order to prevent possible developer gesture recognizer issues
 * Offers the possibility to set a local project image as a placeholder until the actual image is available
 * Offers the possibility to add a spinner at the center of the imageView until the image is fetched
 * If the imageView's size is 0, it sets dimensions to 40x40 prior to the request. This applies to the default UITableViewCells due to the fact when no initial image is present the imageView is hidden.
@@ -67,7 +66,7 @@ self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimag
 }
 ```
 
-With completion closure - With spinner
+With completion closure - With spinner and new scaled size
 ```
 let newSize = CGSize(width: newWidth, height: newHeight)
 self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png", size:newSize) {
