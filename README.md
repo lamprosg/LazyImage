@@ -64,7 +64,7 @@ self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.c
 
 With completion closure and new scaled size
 ```
-let newSize = CGSize(width: imageviewWidth height: imageViewHeight)
+let newSize = CGSize(width: imageViewWidth height: imageViewHeight)
 self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png", size:newSize) {
     () in
     //Image loaded. Do something..
@@ -73,7 +73,7 @@ self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimag
 
 With completion closure - With spinner and new scaled size
 ```
-let newSize = CGSize(width: imageviewWidth height: imageViewHeight)
+let newSize = CGSize(width: imageViewWidth height: imageViewHeight)
 self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png", size:newSize) {
     () in
     //Image loaded. Do something..
