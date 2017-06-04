@@ -35,7 +35,7 @@ class ViewController: UIViewController {
     @IBAction func loadImage(_ sender: AnyObject) {
         
         self.lazyImage.showWithSpinner(imageView:self.imageView, url:self.textField.text!) {
-            () in
+            (error:LazyImageError?) in
             //Lazy loading complete. Do something..
         }
     }

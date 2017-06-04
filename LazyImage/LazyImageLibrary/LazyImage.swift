@@ -7,11 +7,37 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 5.0.0
+//  Version 6.0.0
 
 
 import Foundation
 import UIKit
+
+
+public enum LazyImageError: Error {
+    case CallFailed
+    case noDataAvailable
+    case CorruptedData
+}
+
+extension LazyImageError: LocalizedError {
+    
+    public var errorDescription: String? {
+        switch self {
+        case .CallFailed:
+            return NSLocalizedString("The download request did not succeed.", comment: "Error")
+            
+        case .noDataAvailable:
+            return NSLocalizedString("The download request returned nil response.", comment: "Error")
+            
+        case .CorruptedData:
+            return NSLocalizedString("The downloaded data are corrupted and can not be read", comment: "Error")
+        }
+    }
+}
+
+
+
 
 class LazyImage: NSObject {
     
@@ -19,6 +45,7 @@ class LazyImage: NSObject {
     var oldFrame:CGRect = CGRect()
     var imageAlreadyZoomed:Bool = false   // Flag to track whether there is currently a zoomed image
     var showSpinner:Bool = false          // Flag to track wether to show spinner
+    var forceDownload:Bool = false       // Flag to force download an image even if it is cached on the disk
     var spinner:UIActivityIndicatorView?  // Actual spinner
     var desiredImageSize:CGSize?
     
@@ -26,68 +53,195 @@ class LazyImage: NSObject {
     
     //MARK: Image lazy loading without completion
     
+    
+    /// Downloads and shows an image URL to the specified image view
+    ///
+    /// - Parameters:
+    ///   - imageView: The image view reference to show the image
+    ///   - url: The URL of the image to be downloaded
     func show(imageView:UIImageView, url:String?) -> Void {
-        self.show(imageView: imageView, url: url, defaultImage: nil) {}
+        self.showSpinner = false
+        self.forceDownload = false
+        self.desiredImageSize = nil
+        self.load(imageView: imageView, url: url, defaultImage: nil) {_ in}
     }
     
+    
+    /// Downloads and shows an image URL to the specified image view presenting a spinner until the data are fully downloaded
+    ///
+    /// - Parameters:
+    ///   - imageView: The image view reference to show the image
+    ///   - url: The URL of the image to be downloaded
     func showWithSpinner(imageView:UIImageView, url:String?) -> Void {
         self.showSpinner = true
-        self.show(imageView: imageView, url: url, defaultImage: nil) {}
+        self.forceDownload = false
+        self.desiredImageSize = nil
+        self.load(imageView: imageView, url: url, defaultImage: nil) {_ in}
     }
     
+    
+    /// Downloads and shows an image URL to the specified image view presenting a default image until the data are fully downloaded
+    ///
+    /// - Parameters:
+    ///   - imageView: The image view reference to show the image
+    ///   - url: The URL of the image to be downloaded
+    ///   - defaultImage: The default image to be shown until the image data are fully downloaded
     func show(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
-        self.show(imageView: imageView, url: url, defaultImage: defaultImage) {}
+        self.showSpinner = false
+        self.forceDownload = false
+        self.desiredImageSize = nil
+        self.load(imageView: imageView, url: url, defaultImage: defaultImage) {_ in}
     }
     
+    
+    /// Downloads and shows an image URL to the specified image view presenting both a default image and a spinner until the data are fully downloaded
+    ///
+    /// - Parameters:
+    ///   - imageView: The image view reference to show the image
+    ///   - url: The URL of the image to be downloaded
+    ///   - defaultImage: The default image to be shown until the image data are fully downloaded
     func showWithSpinner(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
         self.showSpinner = true
-        self.show(imageView: imageView, url: url, defaultImage: defaultImage) {}
+        self.forceDownload = false
+        self.desiredImageSize = nil
+        self.load(imageView: imageView, url: url, defaultImage: defaultImage) {_ in}
     }
     
     
     //MARK: Image lazy loading with completion
     
-    func showWithSpinner(imageView:UIImageView, url:String?, completion: @escaping () -> Void) -> Void {
+    
+    /// Downloads and shows an image URL to the specified image view presenting a spinner until the data are fully downloaded
+    ///
+    /// - Parameters:
+    ///   - imageView: The image view reference to show the image
+    ///   - url: The URL of the image to be downloaded
+    ///   - completion: The completion closure when the data are fully downloaded and presented on the image view
+    func showWithSpinner(imageView:UIImageView, url:String?, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
         self.showSpinner = true
-        self.show(imageView: imageView, url: url) {
+        self.forceDownload = false
+        self.desiredImageSize = nil
+        self.load(imageView: imageView, url: url, defaultImage: nil) {
+            (error:LazyImageError?) in
             
             //Call completion block
-            completion()
+            completion(error)
         }
     }
     
-    func show(imageView:UIImageView, url:String?, completion: @escaping () -> Void) -> Void {
-        self.show(imageView: imageView, url: url, defaultImage: nil) {
+    
+    /// Downloads and shows an image URL to the specified image view
+    ///
+    /// - Parameters:
+    ///   - imageView: The image view reference to show the image
+    ///   - url: The URL of the image to be downloaded
+    ///   - completion: The completion closure when the data are fully downloaded and presented on the image view
+    func show(imageView:UIImageView, url:String?, completion: @escaping ( _ error:LazyImageError?) -> Void) -> Void {
+        self.showSpinner = true
+        self.forceDownload = false
+        self.desiredImageSize = nil
+        self.load(imageView: imageView, url: url, defaultImage: nil) {
+            (error:LazyImageError?) in
             
             //Call completion block
-            completion()
+            completion(error)
         }
     }
     
     
     //MARK: Image lazy loading with completion and image resizing
     
-    func showWithSpinner(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping () -> Void) -> Void {
+    
+    /// Downloads and shows an image URL to the specified image view presenting a spinner until the data are fully downloaded.
+    /// The image is rescaled according to the size provided for better rendering
+    ///
+    /// - Parameters:
+    ///   - imageView: The image view reference to show the image
+    ///   - url: The URL of the image to be downloaded
+    ///   - size: The new scaling size of the image
+    ///   - completion: The completion closure when the data are fully downloaded and presented on the image view
+    func showWithSpinner(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
         self.showSpinner = true
+        self.forceDownload = false
         self.desiredImageSize = size
-        self.show(imageView: imageView, url: url) {
+        self.load(imageView: imageView, url: url, defaultImage: nil) {
+            (error:LazyImageError?) in
             
             //Call completion block
-            completion()
-        }
-    }
-    
-    func show(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping () -> Void) -> Void {
-        self.desiredImageSize = size
-        self.show(imageView: imageView, url: url, defaultImage: nil) {
-            
-            //Call completion block
-            completion()
+            completion(error)
         }
     }
     
     
-    func show(imageView:UIImageView, url:String?, defaultImage:String?, completion: @escaping () -> Void) -> Void {
+    /// Downloads and shows an image URL to the specified image view.
+    /// The image is rescaled according to the size provided for better rendering
+    ///
+    /// - Parameters:
+    ///   - imageView: The image view reference to show the image
+    ///   - url: The URL of the image to be downloaded
+    ///   - size: The new scaling size of the image
+    ///   - completion: The completion closure when the data are fully downloaded and presented on the image view
+    func show(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+        self.showSpinner = false
+        self.forceDownload = false
+        self.desiredImageSize = size
+        self.load(imageView: imageView, url: url, defaultImage: nil) {
+            (error:LazyImageError?) in
+            
+            //Call completion block
+            completion(error)
+        }
+    }
+    
+    
+    //MARK: Image lazy loading with force download, with completion and image resizing
+    
+    /// Force downloads, even if cached, and shows an image URL to the specified image view presenting a spinner.
+    /// The image is rescaled according to the size provided for better rendering
+    ///
+    /// - Parameters:
+    ///   - imageView: The image view reference to show the image
+    ///   - url: The URL of the image to be downloaded
+    ///   - size: The new scaling size of the image
+    ///   - completion: The completion closure when the data are fully downloaded and presented on the image view
+    func showOverrideWithSpinner(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+        self.showSpinner = true
+        self.forceDownload = true
+        self.desiredImageSize = size
+        self.load(imageView: imageView, url: url, defaultImage: nil) {
+            (error:LazyImageError?) in
+            
+            //Call completion block
+            completion(error)
+        }
+    }
+    
+    
+    /// Force downloads, even if cached, and shows an image URL to the specified image view.
+    /// The image is rescaled according to the size provided for better rendering
+    ///
+    /// - Parameters:
+    ///   - imageView: The image view reference to show the image
+    ///   - url: The URL of the image to be downloaded
+    ///   - size: The new scaling size of the image
+    ///   - completion: The completion closure when the data are fully downloaded and presented on the image view
+    func showOverride(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+        self.showSpinner = false
+        self.forceDownload = true
+        self.desiredImageSize = size
+        self.load(imageView: imageView, url: url, defaultImage: nil) {
+            (error:LazyImageError?) in
+            
+            //Call completion block
+            completion(error)
+        }
+    }
+    
+    
+    //MARK: - Show Image
+    
+    
+    fileprivate func load(imageView:UIImageView, url:String?, defaultImage:String?, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
         
         if let defaultImg = defaultImage {
             imageView.image = UIImage(named:defaultImg)
@@ -99,6 +253,26 @@ class LazyImage: NSObject {
         
         //Clip subviews for image view
         imageView.clipsToBounds = true;
+        
+        //Force download image if required
+        if self.forceDownload == true {
+            
+            if let defaultImg = defaultImage {
+                imageView.image = UIImage(named:defaultImg)
+            }
+            else {
+                imageView.image = UIImage(named:"") //Blank
+            }
+            
+            //Lazy load image (Asychronous call)
+            self.lazyLoad(imageView: imageView, url: url) {
+                (error:LazyImageError?) in
+                
+                //Completion block reference
+                completion(error)
+            }
+            return
+        }
         
         //Remove all "/" from the url because it will be used as the entire file name in order to be unique
         let imgName:String = url!.replacingOccurrences(of: "/", with: "", options: NSString.CompareOptions.literal, range: nil)
@@ -137,7 +311,8 @@ class LazyImage: NSObject {
                 imageView.image = image;
                 
                 //Completion
-                completion()
+                //Everything went fine
+                completion(nil)
             }
             else {
                 //Image exists but corrupted. Load it again
@@ -150,9 +325,10 @@ class LazyImage: NSObject {
                 
                 //Lazy load image (Asychronous call)
                 self.lazyLoad(imageView: imageView, url: url) {
+                    (error:LazyImageError?) in
                     
                     //Call completion block
-                    completion()
+                    completion(error)
                 }
             }
         }
@@ -168,16 +344,17 @@ class LazyImage: NSObject {
             
             //Lazy load image (Asychronous call)
             self.lazyLoad(imageView: imageView, url: url) {
+                (error:LazyImageError?) in
                 
                 //Completion block reference
-                completion()
+                completion(error)
             }
             
         }
     }
     
     
-    fileprivate func lazyLoad(imageView:UIImageView, url:String?, completion: @escaping () -> Void) -> Void {
+    fileprivate func lazyLoad(imageView:UIImageView, url:String?, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
         
         if url == nil || url!.isEmpty {
             return //URL is null, don't proceed
@@ -224,6 +401,19 @@ class LazyImage: NSObject {
                     
                     if httpResponse.statusCode != 200 {
                         Swift.debugPrint("LazyImage status code : \(httpResponse.statusCode)")
+                        
+                        //Hide spinner
+                        DispatchQueue.main.async(execute: { [weak self] () -> Void in
+                            if let _ = self?.showSpinner {
+                                self?.removeActivityIndicator()
+                            }
+                        })
+                        
+                        //Completion block
+                        //Call did not succeed
+                        let error: LazyImageError = LazyImageError.CallFailed
+                        completion(error)
+                        return
                     }
                 }
                 
@@ -237,9 +427,12 @@ class LazyImage: NSObject {
                     DispatchQueue.main.async(execute: { [weak self] () -> Void in
                         if let _ = self?.showSpinner {
                             self?.removeActivityIndicator()
-                            self?.showSpinner = false
                         }
                     })
+                    
+                    //No data available
+                    let error: LazyImageError = LazyImageError.noDataAvailable
+                    completion(error)
                     return
                 }
                 
@@ -252,7 +445,9 @@ class LazyImage: NSObject {
                                           imagePath:imagePath) {
                                             
                                             //Completion block
-                                            completion()
+                                            //Data available with no errors
+                                            completion(nil)
+                                            return
                     }
                 }
                 else {
@@ -260,11 +455,14 @@ class LazyImage: NSObject {
                     DispatchQueue.main.async(execute: { [weak self] () -> Void in
                         if let _ = self?.showSpinner {
                             self?.removeActivityIndicator()
-                            self?.showSpinner = false
                         }
                         
                         //Completion block
-                        completion()
+                        
+                        //Data available but corrupted)
+                        let error: LazyImageError = LazyImageError.CorruptedData
+                        completion(error)
+                        return
                     })
                 }
             })
