@@ -117,7 +117,7 @@ self.lazyImage.showOverrideWithSpinner(imageView:self.imageView, url:"http://som
     (error:LazyImageError?) in
     //Image loaded. Do something..
 }
-
+```
 
 #### Zoom the image
 ```
