@@ -34,22 +34,22 @@ Create an image object that will hold the instance
 
 It is best that you create one instance per image
 (maybe in your subclass of your object responsible for the image)
-```
+```swift
 lazy var lazyImage:LazyImage = LazyImage()
 ```
 
 Without completion closure
-```
+```swift
 self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png")
 ```
 
 Without completion closure - With spinner
-```
+```swift
 self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png")
 ```
 
 With completion closure
-```
+```swift
 self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png") {
     (error:LazyImageError?) in
     //Image loaded. Do something..
@@ -57,7 +57,7 @@ self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimag
 ```
 
 With completion closure - With spinner
-```
+```swift
 self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png") {
     (error:LazyImageError?) in
     //Image loaded. Do something..
@@ -67,14 +67,14 @@ self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.c
 #### Show an image with a local image placeholder
 
 Without completion closure
-```
+```swift
 self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName")
 ```
 
 With completion closure
-```
+```swift
 self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName") {
-    () in
+    (error:LazyImageError?) in
     //Image loaded. Do something..
 }
 ```
@@ -82,7 +82,7 @@ self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimag
 #### Show an image with scaled size for better performance
 
 With completion closure and new scaled size
-```
+```swift
 let newSize = CGSize(width: imageViewWidth height: imageViewHeight)
 self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png", size:newSize) {
     (error:LazyImageError?) in
@@ -91,7 +91,7 @@ self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimag
 ```
 
 With completion closure - With spinner and new scaled size
-```
+```swift
 let newSize = CGSize(width: imageViewWidth height: imageViewHeight)
 self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png", size:newSize) {
     (error:LazyImageError?) in
@@ -102,7 +102,7 @@ self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.c
 #### Force download an image with scaled size even if it is stored in cache
 
 With completion closure and new scaled size
-```
+```swift
 let newSize = CGSize(width: imageViewWidth height: imageViewHeight)
 self.lazyImage.showOverride(imageView:self.imageView, url:"http://something.com/someimage.png", size:newSize) {
     (error:LazyImageError?) in
@@ -111,7 +111,7 @@ self.lazyImage.showOverride(imageView:self.imageView, url:"http://something.com/
 ```
 
 With completion closure - With spinner and new scaled size
-```
+```swift
 let newSize = CGSize(width: imageViewWidth height: imageViewHeight)
 self.lazyImage.showOverrideWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png", size:newSize) {
     (error:LazyImageError?) in
@@ -120,13 +120,13 @@ self.lazyImage.showOverrideWithSpinner(imageView:self.imageView, url:"http://som
 ```
 
 #### Zoom the image
-```
+```swift
 self.lazyImage.zoom(imageView:self.imageView)
 ```
 
 #### Blur the image (iOS 8 and above)
-```
+```swift
 self.lazyImage.blur(imageView:self.imageView, style: UIBlurEffectStyle.Light)
 ```
-###License
+#### License
 Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
