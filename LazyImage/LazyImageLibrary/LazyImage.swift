@@ -7,13 +7,17 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 6.0.0
+//  Version 6.1.0
 
 
 import Foundation
 import UIKit
 
-
+/// LazyImage error object
+///
+/// - CallFailed: The download request did not succeed.
+/// - noDataAvailable: The download request returned nil response.
+/// - CorruptedData: The downloaded data are corrupted and can not be read.
 public enum LazyImageError: Error {
     case CallFailed
     case noDataAvailable
@@ -31,7 +35,7 @@ extension LazyImageError: LocalizedError {
             return NSLocalizedString("The download request returned nil response.", comment: "Error")
             
         case .CorruptedData:
-            return NSLocalizedString("The downloaded data are corrupted and can not be read", comment: "Error")
+            return NSLocalizedString("The downloaded data are corrupted and can not be read.", comment: "Error")
         }
     }
 }
@@ -48,6 +52,28 @@ class LazyImage: NSObject {
     var forceDownload:Bool = false       // Flag to force download an image even if it is cached on the disk
     var spinner:UIActivityIndicatorView?  // Actual spinner
     var desiredImageSize:CGSize?
+    
+    
+    //MARK: - URL string stripping
+    
+    //TODO: Change this to hash the url
+    private func stripURL(url:String) -> String {
+        return url.replacingOccurrences(of: "/", with: "", options: NSString.CompareOptions.literal, range: nil)
+    }
+    
+    /*
+     private func SHA256(url:String) -> String {
+     
+     let data = url(using: String.Encoding.utf8)
+     let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH))
+     CC_SHA256(((data! as NSData)).bytes, CC_LONG(data!.count), res?.mutableBytes.assumingMemoryBound(to: UInt8.self))
+     let hashedString = "\(res!)".replacingOccurrences(of: "", with: "").replacingOccurrences(of: " ", with: "")
+     let badchar: CharacterSet = CharacterSet(charactersIn: "\"<\",\">\"")
+     let cleanedstring: String = (hashedString.components(separatedBy: badchar) as NSArray).componentsJoined(by: "")
+     return cleanedstring
+     
+     }
+     */
     
     //MARK: - Image lazy loading
     
@@ -275,7 +301,7 @@ class LazyImage: NSObject {
         }
         
         //Remove all "/" from the url because it will be used as the entire file name in order to be unique
-        let imgName:String = url!.replacingOccurrences(of: "/", with: "", options: NSString.CompareOptions.literal, range: nil)
+        let imgName:String = self.stripURL(url: url!)
         
         //Image path
         let imagePath:String = String(format:"%@/%@", NSTemporaryDirectory(), imgName)
@@ -361,7 +387,7 @@ class LazyImage: NSObject {
         }
         
         //Remove all "/" from the url because it will be used as the entire file name in order to be unique
-        let imgName:String = url!.replacingOccurrences(of: "/", with: "", options: NSString.CompareOptions.literal, range: nil)
+        let imgName:String = self.stripURL(url: url!)
         
         //Image path
         let imagePath:String = String(format:"%@/%@", NSTemporaryDirectory(), imgName)
