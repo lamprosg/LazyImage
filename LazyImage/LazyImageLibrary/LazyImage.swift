@@ -7,7 +7,7 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 6.1.0
+//  Version 6.2.0
 
 
 import Foundation
@@ -74,6 +74,67 @@ class LazyImage: NSObject {
      
      }
      */
+    
+    //NARK: - Image storage
+    
+    private func storagePathforImageName(name:String) -> String {
+        return String(format:"%@/%@", NSTemporaryDirectory(), name)
+    }
+    
+    
+    private func saveImage(image:UIImage, imagePath:String) {
+        
+        //Store image to the temporary folder for later use
+        var error: NSError?
+        
+        do {
+            try UIImagePNGRepresentation(image)!.write(to: URL(fileURLWithPath: imagePath), options: [])
+        } catch let error1 as NSError {
+            error = error1
+            if let actualError = error {
+                Swift.debugPrint("Image not saved. \(actualError)")
+            }
+        } catch {
+            fatalError()
+        }
+    }
+    
+    
+    //MARK: - Clear cache for specific URLs
+    
+    
+    /// Clear the storage for specific URLs if they are already downloaded
+    ///
+    /// - Parameter urls: The urls array for which the storage will be cleared
+    func clearCacheForURLs(urls:Array<String>) -> Void {
+        
+        for i in stride(from: 0, to: urls.count, by: 1) {
+            
+            let imgName:String = self.stripURL(url: urls[i])
+            
+            //Image path
+            let imagePath:String = self.storagePathforImageName(name: imgName)
+            
+            //Check if image exists
+            let imageExists:Bool = FileManager.default.fileExists(atPath: imagePath)
+            
+            if imageExists {
+                var error: NSError?
+                
+                do {
+                    try FileManager.default.removeItem(atPath: imagePath)
+                } catch let error1 as NSError {
+                    error = error1
+                    if let actualError = error {
+                        Swift.debugPrint("Image not saved. \(actualError)")
+                    }
+                } catch {
+                    fatalError()
+                }
+            }
+        }
+    }
+    
     
     //MARK: - Image lazy loading
     
@@ -264,6 +325,7 @@ class LazyImage: NSObject {
     }
     
     
+    
     //MARK: - Show Image
     
     
@@ -304,7 +366,7 @@ class LazyImage: NSObject {
         let imgName:String = self.stripURL(url: url!)
         
         //Image path
-        let imagePath:String = String(format:"%@/%@", NSTemporaryDirectory(), imgName)
+        let imagePath:String = self.storagePathforImageName(name: imgName)
         
         //Check if image exists
         let imageExists:Bool = FileManager.default.fileExists(atPath: imagePath)
@@ -390,7 +452,7 @@ class LazyImage: NSObject {
         let imgName:String = self.stripURL(url: url!)
         
         //Image path
-        let imagePath:String = String(format:"%@/%@", NSTemporaryDirectory(), imgName)
+        let imagePath:String = self.storagePathforImageName(name: imgName)
         
         let width:CGFloat = imageView.bounds.size.width;
         let height:CGFloat = imageView.bounds.size.height;
@@ -520,19 +582,7 @@ class LazyImage: NSObject {
             
             imageView.image = image!;
             
-            //Store image to the temporary folder for later use
-            var error: NSError?
-            
-            do {
-                try UIImagePNGRepresentation(fetchedImage)!.write(to: URL(fileURLWithPath: imagePath), options: [])
-            } catch let error1 as NSError {
-                error = error1
-                if let actualError = error {
-                    Swift.debugPrint("Image not saved. \(actualError)")
-                }
-            } catch {
-                fatalError()
-            }
+            self?.saveImage(image: fetchedImage, imagePath: imagePath)
             
             //Completion block
             completion()
