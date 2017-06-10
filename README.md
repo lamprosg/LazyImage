@@ -1,7 +1,7 @@
 ### iOS - LazyImage
 Simple and efficient image lazy loading functionality for the iOS written in Swift
 
-Version 6.1.0
+Version 6.2.0
 
 
 ### Features
@@ -10,6 +10,8 @@ Version 6.1.0
 * Temporary caching of the downloaded images with automatic OS clean up.
 * Guarantees that the same image url will not be downloaded again but will be fetched from the cache.
 * Option for force downloading the same image overriding the cache.
+* Option of clearing images from the cache which correspond to specific URLs so they can be re-downloaded once,
+instead of force downloading them continuously.
 * Offers the possibility to set a local project image as a placeholder until the actual image is available
 * Offers the possibility to add a spinner at the center of the imageView until the image is fetched.
 * Notifies the caller when the operation is complete providing descreptive error if any.
@@ -32,8 +34,7 @@ Find the LazyImage.swift file and copy it to your Swift project. You're done.
 
 Create an image object that will hold the instance
 
-It is best that you create one instance per image
-(maybe in your subclass of your object responsible for the image)
+It is best that you create one instance per object responsible for the image
 ```swift
 lazy var lazyImage:LazyImage = LazyImage()
 ```
@@ -64,6 +65,7 @@ self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.c
 }
 ```
 
+
 #### Show an image with a local image placeholder
 
 Without completion closure
@@ -78,6 +80,7 @@ self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimag
     //Image loaded. Do something..
 }
 ```
+
 
 #### Show an image with scaled size for better performance
 
@@ -99,6 +102,7 @@ self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.c
 }
 ```
 
+
 #### Force download an image with scaled size even if it is stored in cache
 
 With completion closure and new scaled size
@@ -118,6 +122,20 @@ self.lazyImage.showOverrideWithSpinner(imageView:self.imageView, url:"http://som
     //Image loaded. Do something..
 }
 ```
+
+
+#### Clearing the cache for specific image URLs
+
+Sometimes you just need to re-download a specific image with the exact same name once.
+Maybe you know it has changed and the cache has the old one.
+
+Clearing the cache
+```swift
+let imageURLs:[String] = ["https://someimage.png", "https://someotherimage.png"]
+self.lazyImage.clearCacheForURLs(urls: urls)
+//And you're done
+```
+
 
 #### Zoom the image
 ```swift
