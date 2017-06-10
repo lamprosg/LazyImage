@@ -10,7 +10,7 @@ Version 6.2.0
 * Temporary caching of the downloaded images with automatic OS clean up.
 * Guarantees that the same image url will not be downloaded again but will be fetched from the cache.
 * Option for force downloading the same image overriding the cache.
-* Option of clearing images from the cache which correspond to specific URLs so they can be re-downloaded once,
+* Option for clearing images from the cache which correspond to specific URLs so they can be re-downloaded once,
 instead of force downloading them continuously.
 * Offers the possibility to set a local project image as a placeholder until the actual image is available
 * Offers the possibility to add a spinner at the center of the imageView until the image is fetched.
