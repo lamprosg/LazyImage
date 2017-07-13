@@ -7,7 +7,7 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 6.2.0
+//  Version 6.2.1
 
 
 import Foundation
@@ -495,13 +495,13 @@ class LazyImage: NSObject {
                             if let _ = self?.showSpinner {
                                 self?.removeActivityIndicator()
                             }
+                            
+                            //Completion block
+                            //Call did not succeed
+                            let error: LazyImageError = LazyImageError.CallFailed
+                            completion(error)
+                            return
                         })
-                        
-                        //Completion block
-                        //Call did not succeed
-                        let error: LazyImageError = LazyImageError.CallFailed
-                        completion(error)
-                        return
                     }
                 }
                 
@@ -516,18 +516,22 @@ class LazyImage: NSObject {
                         if let _ = self?.showSpinner {
                             self?.removeActivityIndicator()
                         }
+                        
+                        //No data available
+                        let error: LazyImageError = LazyImageError.noDataAvailable
+                        completion(error)
+                        return
                     })
-                    
-                    //No data available
-                    let error: LazyImageError = LazyImageError.noDataAvailable
-                    completion(error)
-                    return
                 }
                 
                 let image:UIImage? = UIImage(data:data!)
                 
                 if let img = image {
                     
+                    //Save the image
+                    self?.saveImage(image: img, imagePath: imagePath)
+                    
+                    //Update the UI
                     self?.updateImageview(imageView:imageView,
                                           fetchedImage:img,
                                           imagePath:imagePath) {
@@ -546,7 +550,6 @@ class LazyImage: NSObject {
                         }
                         
                         //Completion block
-                        
                         //Data available but corrupted)
                         let error: LazyImageError = LazyImageError.CorruptedData
                         completion(error)
@@ -565,14 +568,14 @@ class LazyImage: NSObject {
                                      imagePath:String,
                                      completion: @escaping () -> Void) -> Void {
         
+        //Check if we have a new size
+        var image:UIImage? = fetchedImage
+        if let newSize = self.desiredImageSize {
+            image = self.resizeImage(image: image!, targetSize: newSize)
+        }
+        
         //Go to main thread and update the UI
         DispatchQueue.main.async(execute: { [weak self] () -> Void in
-            
-            //Check if we have a new size
-            var image:UIImage? = fetchedImage
-            if let newSize = self?.desiredImageSize {
-                image = self?.resizeImage(image: image!, targetSize: newSize)
-            }
             
             //Hide spinner
             if let _ = self?.showSpinner {
@@ -581,8 +584,6 @@ class LazyImage: NSObject {
             }
             
             imageView.image = image!;
-            
-            self?.saveImage(image: fetchedImage, imagePath: imagePath)
             
             //Completion block
             completion()
