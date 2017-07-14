@@ -615,6 +615,8 @@ class LazyImage: NSObject {
     //MARK: - Show activity indicator
     
     func showActivityIndicatory(view: UIView) {
+        
+        self.removeActivityIndicator()
         self.spinner = UIActivityIndicatorView()
         self.spinner!.frame = view.bounds
         self.spinner!.hidesWhenStopped = true
