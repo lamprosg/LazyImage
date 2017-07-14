@@ -7,7 +7,7 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 6.2.1
+//  Version 6.3.1
 
 
 import Foundation
@@ -75,7 +75,7 @@ class LazyImage: NSObject {
      }
      */
     
-    //NARK: - Image storage
+    //MARK: - Image storage
     
     private func storagePathforImageName(name:String) -> String {
         return String(format:"%@/%@", NSTemporaryDirectory(), name)
@@ -97,6 +97,20 @@ class LazyImage: NSObject {
         } catch {
             fatalError()
         }
+    }
+    
+    
+    private func readImage(imagePath:String) -> UIImage? {
+        
+        //Read the image
+        var image:UIImage?
+        if let imageData = try? Data(contentsOf: URL(fileURLWithPath: imagePath)) {
+            //Image exists
+            let dat:Data = imageData
+            
+            image = UIImage(data:dat)
+        }
+        return image
     }
     
     
@@ -132,6 +146,65 @@ class LazyImage: NSObject {
                     fatalError()
                 }
             }
+        }
+    }
+    
+    
+    //MARK - Check image existence
+    
+    
+    /// Checks if image exists in storage
+    ///
+    /// - Parameter url: The image URL
+    /// - Returns: returns the image path or nil if image does not exists
+    private func checkIfImageExists(url:String) -> String? {
+        
+        let imgName:String = self.stripURL(url: url)
+        
+        //Image path
+        var imagePath:String? = self.storagePathforImageName(name: imgName)
+        
+        //Check if image exists
+        let imageExists:Bool = FileManager.default.fileExists(atPath: imagePath!)
+        
+        if !imageExists {
+            imagePath = nil
+        }
+        
+        return imagePath
+    }
+    
+    
+    //MARK: - Preload setup image
+    
+    
+    /// Sets up the image before loading with a default image
+    private func setupImageBeforeLoading(imageView:UIImageView, defaultImage:String?) -> Void {
+        
+        if let defaultImg = defaultImage {
+            imageView.image = UIImage(named:defaultImg)
+        }
+        else {
+            imageView.image = UIImage(named:"") //Blank
+        }
+    }
+    
+    
+    //MARK: - Setup 0 framed image
+    
+    private func setUpZeroFramedImageIfNeeded(imageView:UIImageView) -> Void {
+        
+        //Check if imageview size is 0
+        let width:CGFloat = imageView.bounds.size.width;
+        let height:CGFloat = imageView.bounds.size.height;
+        
+        //In case of default cell images (Dimensions are 0 when not present)
+        if height == 0 && width == 0 {
+            
+            var frame:CGRect = imageView.frame
+            frame.size.width = 40
+            frame.size.height = 40
+            imageView.frame = frame
         }
     }
     
@@ -331,11 +404,11 @@ class LazyImage: NSObject {
     
     fileprivate func load(imageView:UIImageView, url:String?, defaultImage:String?, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
         
-        if let defaultImg = defaultImage {
-            imageView.image = UIImage(named:defaultImg)
-        }
+        self.setupImageBeforeLoading(imageView: imageView, defaultImage: defaultImage)
         
         if url == nil || url!.isEmpty {
+            let error: LazyImageError = LazyImageError.CallFailed
+            completion(error)
             return //URL is null, don't proceed
         }
         
@@ -344,13 +417,6 @@ class LazyImage: NSObject {
         
         //Force download image if required
         if self.forceDownload == true {
-            
-            if let defaultImg = defaultImage {
-                imageView.image = UIImage(named:defaultImg)
-            }
-            else {
-                imageView.image = UIImage(named:"") //Blank
-            }
             
             //Lazy load image (Asychronous call)
             self.lazyLoad(imageView: imageView, url: url) {
@@ -362,54 +428,34 @@ class LazyImage: NSObject {
             return
         }
         
-        //Remove all "/" from the url because it will be used as the entire file name in order to be unique
-        let imgName:String = self.stripURL(url: url!)
-        
-        //Image path
-        let imagePath:String = self.storagePathforImageName(name: imgName)
-        
         //Check if image exists
-        let imageExists:Bool = FileManager.default.fileExists(atPath: imagePath)
+        let imagePath:String? = self.checkIfImageExists(url: url!)
         
-        if imageExists {
+        if let imagePath = imagePath {
             
-            //check if imageview size is 0
-            let width:CGFloat = imageView.bounds.size.width;
-            let height:CGFloat = imageView.bounds.size.height;
+            self.setUpZeroFramedImageIfNeeded(imageView: imageView)
             
-            //In case of default cell images (Dimensions are 0 when not present)
-            if height == 0 && width == 0 {
-                
-                var frame:CGRect = imageView.frame
-                frame.size.width = 40
-                frame.size.height = 40
-                imageView.frame = frame
-            }
+            //Try to read the image
+            let image = self.readImage(imagePath: imagePath)
             
-            if let imageData = try? Data(contentsOf: URL(fileURLWithPath: imagePath)) {
-                //Image exists
-                let dat:Data = imageData
+            if let image = image {
+                //Image read successfully
                 
-                var image:UIImage = UIImage(data:dat)!
-                
+                var finalImage = image
                 if let newSize = self.desiredImageSize {
-                    image = self.resizeImage(image: image, targetSize: newSize)
+                    finalImage = self.resizeImage(image: image, targetSize: newSize)
                 }
                 
-                imageView.image = image;
-                
-                //Completion
-                //Everything went fine
-                completion(nil)
+                self.updateImageView(imageView:imageView, fetchedImage:finalImage) {
+                    
+                    //Completion block
+                    //Data available with no errors
+                    completion(nil)
+                    return
+                }
             }
             else {
                 //Image exists but corrupted. Load it again
-                if let defaultImg = defaultImage {
-                    imageView.image = UIImage(named:defaultImg)
-                }
-                else {
-                    imageView.image = UIImage(named:"")
-                }
                 
                 //Lazy load image (Asychronous call)
                 self.lazyLoad(imageView: imageView, url: url) {
@@ -423,12 +469,6 @@ class LazyImage: NSObject {
         else
         {
             //Image does not exist. Load it
-            if let defaultImg = defaultImage {
-                imageView.image = UIImage(named:defaultImg)
-            }
-            else {
-                imageView.image = UIImage(named:"") //Blank
-            }
             
             //Lazy load image (Asychronous call)
             self.lazyLoad(imageView: imageView, url: url) {
@@ -442,34 +482,58 @@ class LazyImage: NSObject {
     }
     
     
-    fileprivate func lazyLoad(imageView:UIImageView, url:String?, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+    private func lazyLoad(imageView:UIImageView, url:String?, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
         
         if url == nil || url!.isEmpty {
+            let error: LazyImageError = LazyImageError.CallFailed
+            completion(error)
             return //URL is null, don't proceed
-        }
-        
-        //Remove all "/" from the url because it will be used as the entire file name in order to be unique
-        let imgName:String = self.stripURL(url: url!)
-        
-        //Image path
-        let imagePath:String = self.storagePathforImageName(name: imgName)
-        
-        let width:CGFloat = imageView.bounds.size.width;
-        let height:CGFloat = imageView.bounds.size.height;
-        
-        //In case of default cell images (Dimensions are 0 when not present)
-        if height == 0 && width == 0 {
-            
-            var frame:CGRect = imageView.frame
-            frame.size.width = 40
-            frame.size.height = 40
-            imageView.frame = frame
         }
         
         //Show spinner
         if self.showSpinner {
             self.showActivityIndicatory(view:imageView)
         }
+        
+        //Make the call
+        self.fetchImage(url: url) {
+            
+            [weak self] (image:UIImage?, error:LazyImageError?) in
+            
+            var finalError = error
+            if finalError == nil {
+                
+                if let img = image {
+                    
+                    let imgName:String? = self?.stripURL(url: url!)
+                    
+                    //Image path
+                    let imagePath:String? = self?.storagePathforImageName(name: imgName!)
+                    
+                    //Save the image
+                    self?.saveImage(image: img, imagePath: imagePath!)
+                }
+                else {
+                    //Completion block
+                    //Data available but corrupted
+                    finalError = LazyImageError.CorruptedData
+                }
+            }
+            
+            //Update the UI
+            self?.updateImageView(imageView:imageView, fetchedImage:image) {
+                
+                //Completion block
+                //Data available with no errors
+                completion(finalError)
+            }
+        }
+    }
+    
+    
+    //MARK: - Call
+    
+    private func fetchImage(url:String?, completion: @escaping (_ image:UIImage?, _ error:LazyImageError?) -> Void) -> Void {
         
         //Lazy load image (Asychronous call)
         let urlObject:URL = URL(string:url!)!
@@ -482,7 +546,7 @@ class LazyImage: NSObject {
         backgroundQueue.async(execute: {
             
             let session:URLSession = URLSession(configuration: URLSessionConfiguration.default)
-            let task = session.dataTask(with: urlRequest, completionHandler: { [weak self] (data, response, error) in
+            let task = session.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
                 
                 if response != nil {
                     let httpResponse:HTTPURLResponse = response as! HTTPURLResponse
@@ -490,18 +554,11 @@ class LazyImage: NSObject {
                     if httpResponse.statusCode != 200 {
                         Swift.debugPrint("LazyImage status code : \(httpResponse.statusCode)")
                         
-                        //Hide spinner
-                        DispatchQueue.main.async(execute: { [weak self] () -> Void in
-                            if let _ = self?.showSpinner {
-                                self?.removeActivityIndicator()
-                            }
-                            
-                            //Completion block
-                            //Call did not succeed
-                            let error: LazyImageError = LazyImageError.CallFailed
-                            completion(error)
-                            return
-                        })
+                        //Completion block
+                        //Call did not succeed
+                        let error: LazyImageError = LazyImageError.CallFailed
+                        completion(nil, error)
+                        return
                     }
                 }
                 
@@ -511,66 +568,29 @@ class LazyImage: NSObject {
                     }
                     Swift.debugPrint("LazyImage: No image data available")
                     
-                    //Hide spinner
-                    DispatchQueue.main.async(execute: { [weak self] () -> Void in
-                        if let _ = self?.showSpinner {
-                            self?.removeActivityIndicator()
-                        }
-                        
-                        //No data available
-                        let error: LazyImageError = LazyImageError.noDataAvailable
-                        completion(error)
-                        return
-                    })
+                    //No data available
+                    let error: LazyImageError = LazyImageError.noDataAvailable
+                    completion(nil, error)
+                    return
                 }
                 
-                let image:UIImage? = UIImage(data:data!)
-                
-                if let img = image {
-                    
-                    //Save the image
-                    self?.saveImage(image: img, imagePath: imagePath)
-                    
-                    //Update the UI
-                    self?.updateImageview(imageView:imageView,
-                                          fetchedImage:img,
-                                          imagePath:imagePath) {
-                                            
-                                            //Completion block
-                                            //Data available with no errors
-                                            completion(nil)
-                                            return
-                    }
-                }
-                else {
-                    //Hide spinner
-                    DispatchQueue.main.async(execute: { [weak self] () -> Void in
-                        if let _ = self?.showSpinner {
-                            self?.removeActivityIndicator()
-                        }
-                        
-                        //Completion block
-                        //Data available but corrupted)
-                        let error: LazyImageError = LazyImageError.CorruptedData
-                        completion(error)
-                        return
-                    })
-                }
+                completion(UIImage(data:data!), nil)
+                return
             })
             task.resume()
         })
     }
     
     
+    //MARK: Update the image
     
-    fileprivate func updateImageview(imageView:UIImageView,
-                                     fetchedImage:UIImage,
-                                     imagePath:String,
-                                     completion: @escaping () -> Void) -> Void {
+    private func updateImageView(imageView:UIImageView, fetchedImage:UIImage?,
+                                 completion: @escaping () -> Void) -> Void {
         
         //Check if we have a new size
         var image:UIImage? = fetchedImage
-        if let newSize = self.desiredImageSize {
+        
+        if let _ = image, let newSize = self.desiredImageSize {
             image = self.resizeImage(image: image!, targetSize: newSize)
         }
         
@@ -583,7 +603,7 @@ class LazyImage: NSObject {
                 self?.showSpinner = false
             }
             
-            imageView.image = image!;
+            imageView.image = image;
             
             //Completion block
             completion()
@@ -606,6 +626,7 @@ class LazyImage: NSObject {
     func removeActivityIndicator() {
         
         if let spinner = self.spinner {
+            
             spinner.stopAnimating()
             spinner.removeFromSuperview()
         }
