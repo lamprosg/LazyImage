@@ -7,7 +7,7 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 6.3.1
+//  Version 6.3.2
 
 
 import Foundation
@@ -183,9 +183,6 @@ class LazyImage: NSObject {
         
         if let defaultImg = defaultImage {
             imageView.image = UIImage(named:defaultImg)
-        }
-        else {
-            imageView.image = UIImage(named:"") //Blank
         }
     }
     
@@ -441,12 +438,7 @@ class LazyImage: NSObject {
             if let image = image {
                 //Image read successfully
                 
-                var finalImage = image
-                if let newSize = self.desiredImageSize {
-                    finalImage = self.resizeImage(image: image, targetSize: newSize)
-                }
-                
-                self.updateImageView(imageView:imageView, fetchedImage:finalImage) {
+                self.updateImageView(imageView:imageView, fetchedImage:image) {
                     
                     //Completion block
                     //Data available with no errors
@@ -603,6 +595,7 @@ class LazyImage: NSObject {
                 self?.showSpinner = false
             }
             
+            //Set the image
             imageView.image = image;
             
             //Completion block
