@@ -1,3 +1,6 @@
+![Alt text](https://camo.githubusercontent.com/7b4af539c919ff517d11b45b8afd97cdc85b2352/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f73776966742d332e302d6f72616e67652e737667 "Swift 3")
+
+
 ### iOS - LazyImage
 Simple and efficient image lazy loading functionality for the iOS written in Swift
 
