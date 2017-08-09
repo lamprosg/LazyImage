@@ -10,7 +10,7 @@ Version 6.3.2
 
 ### Features
 * Asynchronous image downloader on a background thread. Main thread is never blocked.
-* Instance based for better unit testing your classes.
+* Instance based for better unit testing your code.
 * Temporary caching of the downloaded images with automatic OS clean up.
 * Guarantees that the same image url will not be downloaded again but will be fetched from the cache.
 * Option for force downloading the same image overriding the cache.
