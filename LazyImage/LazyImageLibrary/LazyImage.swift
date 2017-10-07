@@ -7,7 +7,7 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 6.3.2
+//  Version 6.4.2
 
 
 import Foundation
@@ -47,10 +47,10 @@ class LazyImage: NSObject {
     
     var backgroundView:UIView?
     var oldFrame:CGRect = CGRect()
-    var imageAlreadyZoomed:Bool = false   // Flag to track whether there is currently a zoomed image
-    var showSpinner:Bool = false          // Flag to track wether to show spinner
-    var forceDownload:Bool = false       // Flag to force download an image even if it is cached on the disk
-    var spinner:UIActivityIndicatorView?  // Actual spinner
+    var imageAlreadyZoomed:Bool = false     // Flag to track whether there is currently a zoomed image
+    var showSpinner:Bool = false            // Flag to track wether to show spinner
+    var forceDownload:Bool = false          // Flag to force download an image even if it is cached on the disk
+    var spinner:UIActivityIndicatorView?    // Actual spinner
     var desiredImageSize:CGSize?
     
     
@@ -525,10 +525,18 @@ class LazyImage: NSObject {
     
     //MARK: - Call
     
-    private func fetchImage(url:String?, completion: @escaping (_ image:UIImage?, _ error:LazyImageError?) -> Void) -> Void {
+    func fetchImage(url:String?, completion: @escaping (_ image:UIImage?, _ error:LazyImageError?) -> Void) -> Void {
+        
+        guard let url = url else {
+            
+            //Call did not succeed
+            let error: LazyImageError = LazyImageError.CallFailed
+            completion(nil, error)
+            return
+        }
         
         //Lazy load image (Asychronous call)
-        let urlObject:URL = URL(string:url!)!
+        let urlObject:URL = URL(string:url)!
         let urlRequest:URLRequest = URLRequest(url: urlObject)
         
         let backgroundQueue = DispatchQueue(label:"imageBackgroundQue",
@@ -701,7 +709,7 @@ class LazyImage: NSObject {
     
     
     
-    func zoomOutImageView(_ tap:UITapGestureRecognizer) -> Void {
+    @objc func zoomOutImageView(_ tap:UITapGestureRecognizer) -> Void {
         
         UIApplication.shared.isStatusBarHidden = false
         
@@ -720,7 +728,7 @@ class LazyImage: NSObject {
     
     
     
-    func rotated()
+    @objc func rotated()
     {
         self.removeZoomedImageView()
         
@@ -795,3 +803,4 @@ class LazyImage: NSObject {
     }
     
 }
+
