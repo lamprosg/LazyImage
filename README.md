@@ -5,7 +5,7 @@
 ### iOS - LazyImage
 Simple and efficient image lazy loading functionality for the iOS written in Swift
 
-Version 6.3.2
+Version 6.4.2
 
 
 ### Features
@@ -138,6 +138,15 @@ Clearing the cache
 let imageURLs:[String] = ["https://someimage.png", "https://someotherimage.png"]
 self.lazyImage.clearCacheForURLs(urls: urls)
 //And you're done
+```
+
+#### Forget UIImageviews. Just get the UIImage
+
+```swift
+self.lazyImage.fetchImage(url: url) {
+    [weak self] (image:UIImage?, error:LazyImageError?) in
+    //image has the UIImage
+}
 ```
 
 
