@@ -13,13 +13,15 @@ Version 6.4.2
 * Instance based for better unit testing your code.
 * Temporary caching of the downloaded images with automatic OS clean up.
 * Guarantees that the same image url will not be downloaded again but will be fetched from the cache.
+* Offers the possibility to set a local project image as a placeholder until the actual image is available
+* Offers the possibility to add a spinner at the center of the imageView until the image is fetched.
+* If the imageView's size is 0, it sets dimensions to 40x40 prior to the request. This applies to the default UITableViewCells due to the fact when no initial image is present the imageView is hidden.
+
+### Complete control over your image data
 * Option for force downloading the same image overriding the cache.
 * Option for clearing images from the cache which correspond to specific URLs so they can be re-downloaded once,
 instead of force downloading them continuously.
-* Offers the possibility to set a local project image as a placeholder until the actual image is available
-* Offers the possibility to add a spinner at the center of the imageView until the image is fetched.
 * Notifies the caller when the operation is complete providing descreptive error if any.
-* If the imageView's size is 0, it sets dimensions to 40x40 prior to the request. This applies to the default UITableViewCells due to the fact when no initial image is present the imageView is hidden.
 * Image can be scaled to your specific view dimensions for best performance and reduced memory allocation.
 * Image can be zoomed to full screen
 * Image can be blurred
