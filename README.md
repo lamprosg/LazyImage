@@ -3,7 +3,8 @@
 
 
 ### iOS - LazyImage
-Simple and efficient image lazy loading functionality for the iOS written in Swift
+Simple and efficient image lazy loading functionality for the iOS written in Swift.
+LazyImage offers ease of use and complete control over your images.
 
 Version 6.4.2
 
