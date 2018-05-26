@@ -1,0 +1,22 @@
+{
+  "name": "LazyImage",
+  "version": "0.1.0",
+  "summary": "A short description of LazyImage.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Lampros Giampouras/LazyImage",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Lampros Giampouras": "l.giampouras@afse.eu"
+  },
+  "source": {
+    "git": "https://github.com/Lampros Giampouras/LazyImage.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "LazyImage/Classes/**/*"
+}

@@ -1,0 +1,6 @@
+framework module LazyImage {
+  umbrella header "LazyImage-umbrella.h"
+
+  export *
+  module * { export * }
+}

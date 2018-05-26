@@ -1,0 +1,16 @@
+PODS:
+  - LazyImage (0.1.0)
+
+DEPENDENCIES:
+  - LazyImage (from `../`)
+
+EXTERNAL SOURCES:
+  LazyImage:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  LazyImage: df7fedf23f974b42453870871329f3337c3574cb
+
+PODFILE CHECKSUM: b3cdedd9c1fda5156b76ea83a20494789b841a32
+
+COCOAPODS: 1.5.0
