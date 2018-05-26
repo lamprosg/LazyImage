@@ -29,10 +29,10 @@ instead of force downloading them continuously.
 
 
 
-### Installation
-Currently only manual installation is available (1 file)
-
-Find the LazyImage.swift file and copy it to your Swift project. You're done.
+### Installation - Cocoapods
+```ruby
+pod 'LazyImage'
+```
 
 
 ### Usage
