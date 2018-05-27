@@ -1,5 +1,6 @@
-![Alt text](https://camo.githubusercontent.com/11874553c483b3630dff4ac1e54f1d0fb030bb86/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f53776966742d332e302532422d6f72616e67652e737667 "Swift 3+")
-![Alt text](https://camo.githubusercontent.com/1d276aa371242346c77c3a5b8db34beaa2014722/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f694f532d382e302532422d626c75652e737667 "iOS 8+")
+[![Version](https://img.shields.io/cocoapods/v/LazyImage.svg?style=flat)](https://cocoapods.org/pods/LazyImage)
+[![License](https://img.shields.io/cocoapods/l/LazyImage.svg?style=flat)](https://cocoapods.org/pods/LazyImage)
+[![Platform](https://img.shields.io/cocoapods/p/LazyImage.svg?style=flat)](https://cocoapods.org/pods/LazyImage)
 
 
 ### iOS - LazyImage
