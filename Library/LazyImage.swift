@@ -43,7 +43,7 @@ extension LazyImageError: LocalizedError {
 
 
 
-class LazyImage: NSObject {
+public class LazyImage: NSObject {
     
     var backgroundView:UIView?
     var oldFrame:CGRect = CGRect()
@@ -120,7 +120,7 @@ class LazyImage: NSObject {
     /// Clear the storage for specific URLs if they are already downloaded
     ///
     /// - Parameter urls: The urls array for which the storage will be cleared
-    func clearCacheForURLs(urls:Array<String>) -> Void {
+    public func clearCacheForURLs(urls:Array<String>) -> Void {
         
         for i in stride(from: 0, to: urls.count, by: 1) {
             
@@ -216,7 +216,7 @@ class LazyImage: NSObject {
     /// - Parameters:
     ///   - imageView: The image view reference to show the image
     ///   - url: The URL of the image to be downloaded
-    func show(imageView:UIImageView, url:String?) -> Void {
+    public func show(imageView:UIImageView, url:String?) -> Void {
         self.showSpinner = false
         self.forceDownload = false
         self.desiredImageSize = nil
@@ -229,7 +229,7 @@ class LazyImage: NSObject {
     /// - Parameters:
     ///   - imageView: The image view reference to show the image
     ///   - url: The URL of the image to be downloaded
-    func showWithSpinner(imageView:UIImageView, url:String?) -> Void {
+    public func showWithSpinner(imageView:UIImageView, url:String?) -> Void {
         self.showSpinner = true
         self.forceDownload = false
         self.desiredImageSize = nil
@@ -243,7 +243,7 @@ class LazyImage: NSObject {
     ///   - imageView: The image view reference to show the image
     ///   - url: The URL of the image to be downloaded
     ///   - defaultImage: The default image to be shown until the image data are fully downloaded
-    func show(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
+    public func show(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
         self.showSpinner = false
         self.forceDownload = false
         self.desiredImageSize = nil
@@ -257,7 +257,7 @@ class LazyImage: NSObject {
     ///   - imageView: The image view reference to show the image
     ///   - url: The URL of the image to be downloaded
     ///   - defaultImage: The default image to be shown until the image data are fully downloaded
-    func showWithSpinner(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
+    public func showWithSpinner(imageView:UIImageView, url:String?, defaultImage:String?) -> Void {
         self.showSpinner = true
         self.forceDownload = false
         self.desiredImageSize = nil
@@ -274,7 +274,7 @@ class LazyImage: NSObject {
     ///   - imageView: The image view reference to show the image
     ///   - url: The URL of the image to be downloaded
     ///   - completion: The completion closure when the data are fully downloaded and presented on the image view
-    func showWithSpinner(imageView:UIImageView, url:String?, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+    public func showWithSpinner(imageView:UIImageView, url:String?, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
         self.showSpinner = true
         self.forceDownload = false
         self.desiredImageSize = nil
@@ -293,7 +293,7 @@ class LazyImage: NSObject {
     ///   - imageView: The image view reference to show the image
     ///   - url: The URL of the image to be downloaded
     ///   - completion: The completion closure when the data are fully downloaded and presented on the image view
-    func show(imageView:UIImageView, url:String?, completion: @escaping ( _ error:LazyImageError?) -> Void) -> Void {
+    public func show(imageView:UIImageView, url:String?, completion: @escaping ( _ error:LazyImageError?) -> Void) -> Void {
         self.showSpinner = true
         self.forceDownload = false
         self.desiredImageSize = nil
@@ -317,7 +317,7 @@ class LazyImage: NSObject {
     ///   - url: The URL of the image to be downloaded
     ///   - size: The new scaling size of the image
     ///   - completion: The completion closure when the data are fully downloaded and presented on the image view
-    func showWithSpinner(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+    public func showWithSpinner(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
         self.showSpinner = true
         self.forceDownload = false
         self.desiredImageSize = size
@@ -338,7 +338,7 @@ class LazyImage: NSObject {
     ///   - url: The URL of the image to be downloaded
     ///   - size: The new scaling size of the image
     ///   - completion: The completion closure when the data are fully downloaded and presented on the image view
-    func show(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+    public func show(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
         self.showSpinner = false
         self.forceDownload = false
         self.desiredImageSize = size
@@ -361,7 +361,7 @@ class LazyImage: NSObject {
     ///   - url: The URL of the image to be downloaded
     ///   - size: The new scaling size of the image
     ///   - completion: The completion closure when the data are fully downloaded and presented on the image view
-    func showOverrideWithSpinner(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+    public func showOverrideWithSpinner(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
         self.showSpinner = true
         self.forceDownload = true
         self.desiredImageSize = size
@@ -382,7 +382,7 @@ class LazyImage: NSObject {
     ///   - url: The URL of the image to be downloaded
     ///   - size: The new scaling size of the image
     ///   - completion: The completion closure when the data are fully downloaded and presented on the image view
-    func showOverride(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+    public func showOverride(imageView:UIImageView, url:String?, size:CGSize, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
         self.showSpinner = false
         self.forceDownload = true
         self.desiredImageSize = size
@@ -399,7 +399,7 @@ class LazyImage: NSObject {
     //MARK: - Show Image
     
     
-    fileprivate func load(imageView:UIImageView, url:String?, defaultImage:String?, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
+    private func load(imageView:UIImageView, url:String?, defaultImage:String?, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
         
         self.setupImageBeforeLoading(imageView: imageView, defaultImage: defaultImage)
         
@@ -525,7 +525,7 @@ class LazyImage: NSObject {
     
     //MARK: - Call
     
-    func fetchImage(url:String?, completion: @escaping (_ image:UIImage?, _ error:LazyImageError?) -> Void) -> Void {
+    public func fetchImage(url:String?, completion: @escaping (_ image:UIImage?, _ error:LazyImageError?) -> Void) -> Void {
         
         guard let url = url else {
             
@@ -615,7 +615,7 @@ class LazyImage: NSObject {
     /****************************************************/
     //MARK: - Show activity indicator
     
-    func showActivityIndicatory(view: UIView) {
+    private func showActivityIndicatory(view: UIView) {
         
         self.removeActivityIndicator()
         self.spinner = UIActivityIndicatorView()
@@ -626,7 +626,7 @@ class LazyImage: NSObject {
         self.spinner!.startAnimating()
     }
     
-    func removeActivityIndicator() {
+    private func removeActivityIndicator() {
         
         if let spinner = self.spinner {
             
@@ -641,7 +641,7 @@ class LazyImage: NSObject {
     /****************************************************/
     //MARK: - Zoom functionality
     
-    func zoom(imageView:UIImageView) -> Void {
+    public func zoom(imageView:UIImageView) -> Void {
         
         if imageView.image == nil {
             return  //No image loaded return
@@ -767,7 +767,7 @@ class LazyImage: NSObject {
     //MARK: - Resize image
     
     
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+    public func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
         
         let horizontalRatio:CGFloat = targetSize.width / image.size.width
         let verticalRatio:CGFloat = targetSize.height / image.size.height
@@ -785,7 +785,7 @@ class LazyImage: NSObject {
     /****************************************************/
     //MARK: - Blur
     
-    func blur(imageView:UIImageView, style:UIBlurEffectStyle) -> UIVisualEffectView? {
+    public func blur(imageView:UIImageView, style:UIBlurEffectStyle) -> UIVisualEffectView? {
         
         if imageView.image == nil {
             return nil  //No image loaded return
