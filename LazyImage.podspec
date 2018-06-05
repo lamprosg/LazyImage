@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'LazyImage'
-  s.version          = '6.5.0'
+  s.version          = '6.5.1'
   s.summary          = 'Simple and efficient image lazy loading for iOS written in Swift'
 
 # This description is used to generate tags and improve search results.
@@ -46,7 +46,7 @@ Image can be blurred
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   s.swift_version    = '4.0'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '8.0'
 
   s.source_files = 'Library/*'
   
