@@ -7,7 +7,7 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 6.5.1
+//  Version 6.5.2
 
 
 import Foundation
@@ -62,17 +62,17 @@ public class LazyImage: NSObject {
     }
     
     /*
-    private func SHA256(url:String) -> String {
-        
-        let data = url(using: String.Encoding.utf8)
-        let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH))
-        CC_SHA256(((data! as NSData)).bytes, CC_LONG(data!.count), res?.mutableBytes.assumingMemoryBound(to: UInt8.self))
-        let hashedString = "\(res!)".replacingOccurrences(of: "", with: "").replacingOccurrences(of: " ", with: "")
-        let badchar: CharacterSet = CharacterSet(charactersIn: "\"<\",\">\"")
-        let cleanedstring: String = (hashedString.components(separatedBy: badchar) as NSArray).componentsJoined(by: "")
-        return cleanedstring
-        
-    }
+     private func SHA256(url:String) -> String {
+     
+     let data = url(using: String.Encoding.utf8)
+     let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH))
+     CC_SHA256(((data! as NSData)).bytes, CC_LONG(data!.count), res?.mutableBytes.assumingMemoryBound(to: UInt8.self))
+     let hashedString = "\(res!)".replacingOccurrences(of: "", with: "").replacingOccurrences(of: " ", with: "")
+     let badchar: CharacterSet = CharacterSet(charactersIn: "\"<\",\">\"")
+     let cleanedstring: String = (hashedString.components(separatedBy: badchar) as NSArray).componentsJoined(by: "")
+     return cleanedstring
+     
+     }
      */
     
     //MARK: - Image storage
@@ -100,17 +100,19 @@ public class LazyImage: NSObject {
     }
     
     
-    private func readImage(imagePath:String) -> UIImage? {
-        
-        //Read the image
+    private func readImage(imagePath:String, completion: @escaping (_ error:UIImage?) -> Void) -> Void {
         var image:UIImage?
-        if let imageData = try? Data(contentsOf: URL(fileURLWithPath: imagePath)) {
-            //Image exists
-            let dat:Data = imageData
-            
-            image = UIImage(data:dat)
+        DispatchQueue.global(qos: .userInteractive).async {
+            if let imageData = try? Data(contentsOf: URL(fileURLWithPath: imagePath)) {
+                //Image exists
+                let dat:Data = imageData
+                
+                image = UIImage(data:dat)
+            }
+            DispatchQueue.main.async {
+                completion(image)
+            }
         }
-        return image
     }
     
     
@@ -190,7 +192,7 @@ public class LazyImage: NSObject {
     //MARK: - Setup 0 framed image
     
     private func setUpZeroFramedImageIfNeeded(imageView:UIImageView) -> Void {
-    
+        
         //Check if imageview size is 0
         let width:CGFloat = imageView.bounds.size.width;
         let height:CGFloat = imageView.bounds.size.height;
@@ -433,28 +435,30 @@ public class LazyImage: NSObject {
             self.setUpZeroFramedImageIfNeeded(imageView: imageView)
             
             //Try to read the image
-            let image = self.readImage(imagePath: imagePath)
-            
-            if let image = image {
-                //Image read successfully
+            self.readImage(imagePath: imagePath) {
+                [weak self] (image:UIImage?) in
                 
-                self.updateImageView(imageView:imageView, fetchedImage:image) {
+                if let image = image {
+                    //Image read successfully
                     
-                    //Completion block
-                    //Data available with no errors
-                    completion(nil)
-                    return
+                    self?.updateImageView(imageView:imageView, fetchedImage:image) {
+                        
+                        //Completion block
+                        //Data available with no errors
+                        completion(nil)
+                        return
+                    }
                 }
-            }
-            else {
-                //Image exists but corrupted. Load it again
-                
-                //Lazy load image (Asychronous call)
-                self.lazyLoad(imageView: imageView, url: url) {
-                    (error:LazyImageError?) in
+                else {
+                    //Image exists but corrupted. Load it again
                     
-                    //Call completion block
-                    completion(error)
+                    //Lazy load image (Asychronous call)
+                    self?.lazyLoad(imageView: imageView, url: url) {
+                        (error:LazyImageError?) in
+                        
+                        //Call completion block
+                        completion(error)
+                    }
                 }
             }
         }
@@ -567,7 +571,7 @@ public class LazyImage: NSObject {
                         Swift.debugPrint("Error : \(error!.localizedDescription)")
                     }
                     Swift.debugPrint("LazyImage: No image data available")
-                        
+                    
                     //No data available
                     let error: LazyImageError = LazyImageError.noDataAvailable
                     completion(nil, error)
@@ -698,7 +702,7 @@ public class LazyImage: NSObject {
         UIView.animate(withDuration: 0.3, animations: {
             imgV.frame=CGRect(x: 0,y: (screenBounds.size.height-image.size.height*screenBounds.size.width/image.size.width)/2, width: screenBounds.size.width, height: image.size.height*screenBounds.size.width/image.size.width)
             self.backgroundView!.alpha=1;
-            },
+        },
                        completion: {(value: Bool) in
                         UIApplication.shared.isStatusBarHidden = true
                         
@@ -718,11 +722,11 @@ public class LazyImage: NSObject {
         UIView.animate(withDuration: 0.3, animations: {
             imgV.frame = self.oldFrame
             self.backgroundView!.alpha=0
-            },
-           completion: {(value: Bool) in
-            self.backgroundView!.removeFromSuperview()
-            self.backgroundView = nil
-            self.imageAlreadyZoomed = false  //No more zoomed view
+        },
+                       completion: {(value: Bool) in
+                        self.backgroundView!.removeFromSuperview()
+                        self.backgroundView = nil
+                        self.imageAlreadyZoomed = false  //No more zoomed view
         })
     }
     
@@ -753,7 +757,7 @@ public class LazyImage: NSObject {
             
             UIView.animate(withDuration: 0.3, animations: {
                 bgView.alpha=0
-                },
+            },
                            completion: {(value: Bool) in
                             bgView.removeFromSuperview()
                             self.backgroundView = nil
