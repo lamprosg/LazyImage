@@ -88,7 +88,7 @@ public class LazyImage: NSObject {
         var error: NSError?
         
         do {
-            try UIImagePNGRepresentation(image)!.write(to: URL(fileURLWithPath: imagePath), options: [])
+            try image.pngData()!.write(to: URL(fileURLWithPath: imagePath), options: [])
         } catch let error1 as NSError {
             error = error1
             if let actualError = error {
@@ -625,7 +625,7 @@ public class LazyImage: NSObject {
         self.spinner = UIActivityIndicatorView()
         self.spinner!.frame = view.bounds
         self.spinner!.hidesWhenStopped = true
-        self.spinner!.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        self.spinner!.style = UIActivityIndicatorView.Style.gray
         view.addSubview(self.spinner!)
         self.spinner!.startAnimating()
     }
@@ -707,7 +707,7 @@ public class LazyImage: NSObject {
                         UIApplication.shared.isStatusBarHidden = true
                         
                         //Track when device is rotated so we can remove the zoomed view
-                        NotificationCenter.default.addObserver(self, selector:#selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+                        NotificationCenter.default.addObserver(self, selector:#selector(self.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         })
     }
     
@@ -736,12 +736,12 @@ public class LazyImage: NSObject {
     {
         self.removeZoomedImageView()
         
-        if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation))
+        if(UIDevice.current.orientation.isLandscape)
         {
             //println("landscape")
         }
         
-        if(UIDeviceOrientationIsPortrait(UIDevice.current.orientation))
+        if(UIDevice.current.orientation.isPortrait)
         {
             //println("Portrait")
         }
@@ -789,7 +789,7 @@ public class LazyImage: NSObject {
     /****************************************************/
     //MARK: - Blur
     
-    public func blur(imageView:UIImageView, style:UIBlurEffectStyle) -> UIVisualEffectView? {
+    public func blur(imageView:UIImageView, style:UIBlurEffect.Style) -> UIVisualEffectView? {
         
         if imageView.image == nil {
             return nil  //No image loaded return
