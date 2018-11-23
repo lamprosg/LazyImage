@@ -1,13 +1,13 @@
-[![Version](https://img.shields.io/cocoapods/v/LazyImage.svg?style=flat)](https://cocoapods.org/pods/LazyImage)
-[![License](https://img.shields.io/cocoapods/l/LazyImage.svg?style=flat)](https://cocoapods.org/pods/LazyImage)
-[![Platform](https://img.shields.io/cocoapods/p/LazyImage.svg?style=flat)](https://cocoapods.org/pods/LazyImage)
+[![Version](https://img.shields.io/cocoapods/v/LazyImage.svg?style=flat&logo=Swift)](https://cocoapods.org/pods/LazyImage)
+[![License](https://img.shields.io/cocoapods/l/LazyImage.svg?style=flat&logo=Swift)](https://cocoapods.org/pods/LazyImage)
+[![Platform](https://img.shields.io/cocoapods/p/LazyImage.svg?style=flat&logo=Swift)](https://cocoapods.org/pods/LazyImage)
 
 
-### iOS - LazyImage
+### LazyImage
 Simple and efficient image lazy loading functionality for the iOS written in Swift.
 LazyImage offers ease of use and complete control over your images.
 
-Version 6.6.0
+Version 6.6.1
 
 
 ### Features
@@ -148,7 +148,7 @@ self.lazyImage.clearCacheForURLs(urls: urls)
 
 ```swift
 self.lazyImage.fetchImage(url: url) {
-[weak self] (image:UIImage?, error:LazyImageError?) in
+ (image:UIImage?, error:LazyImageError?) in
 //image has the UIImage
 }
 ```

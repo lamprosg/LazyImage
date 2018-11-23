@@ -7,7 +7,7 @@
 //  https://github.com/lamprosg/LazyImage
 
 //  Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-//  Version 6.5.2
+//  Version 6.6.1
 
 
 import Foundation
@@ -40,9 +40,6 @@ extension LazyImageError: LocalizedError {
     }
 }
 
-
-
-
 public class LazyImage: NSObject {
     
     var backgroundView:UIView?
@@ -52,7 +49,6 @@ public class LazyImage: NSObject {
     var forceDownload:Bool = false          // Flag to force download an image even if it is cached on the disk
     var spinner:UIActivityIndicatorView?    // Actual spinner
     var desiredImageSize:CGSize?
-    
     
     //MARK: - URL string stripping
     
@@ -77,28 +73,33 @@ public class LazyImage: NSObject {
     
     //MARK: - Image storage
     
+    /// The storage path for a given image unique name
+    ///
+    /// - Parameter name: The unique name of the image
+    /// - Returns: Returns the storage path
     private func storagePathforImageName(name:String) -> String {
         return String(format:"%@/%@", NSTemporaryDirectory(), name)
     }
     
-    
+    /// Saves an image to a given storage path
+    ///
+    /// - Parameters:
+    ///   - image: The image to be saved
+    ///   - imagePath: The image path where the image will be saved
     private func saveImage(image:UIImage, imagePath:String) {
         
         //Store image to the temporary folder for later use
-        var error: NSError?
+        var error: Error?
         
         do {
             try image.pngData()!.write(to: URL(fileURLWithPath: imagePath), options: [])
-        } catch let error1 as NSError {
+        } catch let error1 {
             error = error1
             if let actualError = error {
                 Swift.debugPrint("Image not saved. \(actualError)")
             }
-        } catch {
-            fatalError()
         }
     }
-    
     
     private func readImage(imagePath:String, completion: @escaping (_ error:UIImage?) -> Void) -> Void {
         var image:UIImage?
@@ -109,15 +110,11 @@ public class LazyImage: NSObject {
                 
                 image = UIImage(data:dat)
             }
-            DispatchQueue.main.async {
-                completion(image)
-            }
+            completion(image)
         }
     }
     
-    
     //MARK: - Clear cache for specific URLs
-    
     
     /// Clear the storage for specific URLs if they are already downloaded
     ///
@@ -135,25 +132,21 @@ public class LazyImage: NSObject {
             let imageExists:Bool = FileManager.default.fileExists(atPath: imagePath)
             
             if imageExists {
-                var error: NSError?
+                var error: Error?
                 
                 do {
                     try FileManager.default.removeItem(atPath: imagePath)
-                } catch let error1 as NSError {
+                } catch let error1 {
                     error = error1
                     if let actualError = error {
                         Swift.debugPrint("Image not saved. \(actualError)")
                     }
-                } catch {
-                    fatalError()
                 }
             }
         }
     }
     
-    
     //MARK - Check image existence
-    
     
     /// Checks if image exists in storage
     ///
@@ -176,9 +169,7 @@ public class LazyImage: NSObject {
         return imagePath
     }
     
-    
     //MARK: - Preload setup image
-    
     
     /// Sets up the image before loading with a default image
     private func setupImageBeforeLoading(imageView:UIImageView, defaultImage:String?) -> Void {
@@ -187,7 +178,6 @@ public class LazyImage: NSObject {
             imageView.image = UIImage(named:defaultImg)
         }
     }
-    
     
     //MARK: - Setup 0 framed image
     
@@ -207,11 +197,9 @@ public class LazyImage: NSObject {
         }
     }
     
-    
     //MARK: - Image lazy loading
     
     //MARK: Image lazy loading without completion
-    
     
     /// Downloads and shows an image URL to the specified image view
     ///
@@ -225,7 +213,6 @@ public class LazyImage: NSObject {
         self.load(imageView: imageView, url: url, defaultImage: nil) {_ in}
     }
     
-    
     /// Downloads and shows an image URL to the specified image view presenting a spinner until the data are fully downloaded
     ///
     /// - Parameters:
@@ -237,7 +224,6 @@ public class LazyImage: NSObject {
         self.desiredImageSize = nil
         self.load(imageView: imageView, url: url, defaultImage: nil) {_ in}
     }
-    
     
     /// Downloads and shows an image URL to the specified image view presenting a default image until the data are fully downloaded
     ///
@@ -252,7 +238,6 @@ public class LazyImage: NSObject {
         self.load(imageView: imageView, url: url, defaultImage: defaultImage) {_ in}
     }
     
-    
     /// Downloads and shows an image URL to the specified image view presenting both a default image and a spinner until the data are fully downloaded
     ///
     /// - Parameters:
@@ -266,9 +251,7 @@ public class LazyImage: NSObject {
         self.load(imageView: imageView, url: url, defaultImage: defaultImage) {_ in}
     }
     
-    
     //MARK: Image lazy loading with completion
-    
     
     /// Downloads and shows an image URL to the specified image view presenting a spinner until the data are fully downloaded
     ///
@@ -288,7 +271,6 @@ public class LazyImage: NSObject {
         }
     }
     
-    
     /// Downloads and shows an image URL to the specified image view
     ///
     /// - Parameters:
@@ -307,9 +289,7 @@ public class LazyImage: NSObject {
         }
     }
     
-    
     //MARK: Image lazy loading with completion and image resizing
-    
     
     /// Downloads and shows an image URL to the specified image view presenting a spinner until the data are fully downloaded.
     /// The image is rescaled according to the size provided for better rendering
@@ -331,7 +311,6 @@ public class LazyImage: NSObject {
         }
     }
     
-    
     /// Downloads and shows an image URL to the specified image view.
     /// The image is rescaled according to the size provided for better rendering
     ///
@@ -351,7 +330,6 @@ public class LazyImage: NSObject {
             completion(error)
         }
     }
-    
     
     //MARK: Image lazy loading with force download, with completion and image resizing
     
@@ -375,7 +353,6 @@ public class LazyImage: NSObject {
         }
     }
     
-    
     /// Force downloads, even if cached, and shows an image URL to the specified image view.
     /// The image is rescaled according to the size provided for better rendering
     ///
@@ -396,10 +373,7 @@ public class LazyImage: NSObject {
         }
     }
     
-    
-    
     //MARK: - Show Image
-    
     
     private func load(imageView:UIImageView, url:String?, defaultImage:String?, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
         
@@ -477,7 +451,6 @@ public class LazyImage: NSObject {
         }
     }
     
-    
     private func lazyLoad(imageView:UIImageView, url:String?, completion: @escaping (_ error:LazyImageError?) -> Void) -> Void {
         
         if url == nil || url!.isEmpty {
@@ -525,7 +498,6 @@ public class LazyImage: NSObject {
             }
         }
     }
-    
     
     //MARK: - Call
     
@@ -585,7 +557,6 @@ public class LazyImage: NSObject {
         })
     }
     
-    
     //MARK: Update the image
     
     private func updateImageView(imageView:UIImageView, fetchedImage:UIImage?,
@@ -615,7 +586,6 @@ public class LazyImage: NSObject {
         })
     }
     
-    
     /****************************************************/
     //MARK: - Show activity indicator
     
@@ -640,7 +610,6 @@ public class LazyImage: NSObject {
         //Reset
         self.spinner = nil
     }
-    
     
     /****************************************************/
     //MARK: - Zoom functionality
@@ -711,8 +680,6 @@ public class LazyImage: NSObject {
         })
     }
     
-    
-    
     @objc func zoomOutImageView(_ tap:UITapGestureRecognizer) -> Void {
         
         UIApplication.shared.isStatusBarHidden = false
@@ -730,10 +697,8 @@ public class LazyImage: NSObject {
         })
     }
     
-    
-    
-    @objc func rotated()
-    {
+    @objc func rotated() {
+        
         self.removeZoomedImageView()
         
         if(UIDevice.current.orientation.isLandscape)
@@ -747,7 +712,6 @@ public class LazyImage: NSObject {
         }
         
     }
-    
     
     func removeZoomedImageView() -> Void {
         
@@ -766,10 +730,8 @@ public class LazyImage: NSObject {
         }
     }
     
-    
     /****************************************************/
     //MARK: - Resize image
-    
     
     public func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
         
@@ -784,7 +746,6 @@ public class LazyImage: NSObject {
         UIGraphicsEndImageContext()
         return newImage!
     }
-    
     
     /****************************************************/
     //MARK: - Blur
@@ -805,5 +766,4 @@ public class LazyImage: NSObject {
         imageView.addSubview(blurView)
         return blurView
     }
-    
 }
