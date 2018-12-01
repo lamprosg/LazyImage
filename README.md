@@ -51,6 +51,25 @@ imageview.image = UIImage(named:"someAsset")
 imageView.imageURL = "https://domain.com/thepathtotheimage.png"
 ```
 
+In case you want to know if the image fails to be retrieved.
+
+Use the LazyImageViewDelegate.
+
+```swift
+@IBOutlet weak var imageView: LazyImageView!
+
+imageView.delegate = <your delegate target with conforms to LazyImageViewDelegate>
+
+//Set the image URL
+imageView.imageURL = "https://domain.com/thepathtotheimage.png"
+
+//If an error occurs this will be called
+//url is the image URL failed to be fetched.
+func errorDownloadingImage(url:String) -> Void {
+
+}
+```
+
 ### LazyImage
 
 #### For more options you can use the LazyImage object.
