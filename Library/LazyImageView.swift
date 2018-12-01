@@ -7,19 +7,19 @@
 
 import UIKit
 
-@objc protocol LazyImageViewDelegate: class {
+@objc public protocol LazyImageViewDelegate: class {
     
     //Error downloading image
     @objc optional func errorDownloadingImage(url:String) -> Void
 }
 
-class LazyImageView: UIImageView {
+open class LazyImageView: UIImageView {
     
     /// The delegate
-    weak var delegate: LazyImageViewDelegate?
+    open weak var delegate: LazyImageViewDelegate?
     
     /// The image url
-    var imageURL:String? {
+    open var imageURL:String? {
         didSet {
             self.loaded = false
             self.setNeedsLayout()
@@ -28,14 +28,14 @@ class LazyImageView: UIImageView {
     }
     
     /// Wether the image will be forced downloaded
-    var forceDownload:Bool = false
+    open var forceDownload:Bool = false
     
     ///The LazyImage object
     lazy var lazyImage:LazyImage = LazyImage()
     
     private var loaded:Bool = false
     
-    override func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         if (self.frame.size != CGSize.zero) && !self.loaded {
