@@ -7,8 +7,6 @@
 Simple and efficient image lazy loading functionality for the iOS written in Swift.
 LazyImage offers ease of use and complete control over your images.
 
-Version 6.6.1
-
 
 ### Features
 * Asynchronous image downloader on a background thread. Main thread is never blocked.
@@ -38,9 +36,28 @@ pod 'LazyImage'
 
 ### Usage
 
+### LazyImageView
+
+The simplest way to show an image on an image view is by setting the imageURL property
+
+Example:
+```swift
+@IBOutlet weak var imageView: LazyImageView!
+
+//Normal image
+imageview.image = UIImage(named:"someAsset")
+
+//Network image
+imageView.imageURL = "https://domain.com/thepathtotheimage.png"
+```
+
+### LazyImage
+
+#### For more options you can use the LazyImage object.
+
 #### Show an image on an imageView
 
-Create an image object that will hold the instance
+Create a lazy image object that will hold the instance.
 
 It is best that you create one instance per object responsible for the image
 ```swift
@@ -153,6 +170,7 @@ self.lazyImage.fetchImage(url: url) {
 }
 ```
 
+### Extra options
 
 #### Zoom the image
 ```swift

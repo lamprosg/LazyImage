@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0500FEB721B2A33900C591A0 /* LazyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0500FEB621B2A33900C591A0 /* LazyImageView.swift */; };
 		050F1DF020B9A296001942A9 /* LazyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050F1DEF20B9A296001942A9 /* LazyImage.swift */; };
 		1C4FF93829C21BDBDDD38B4FFA973204 /* LazyImage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB9A584833AAE74E8EE80B966B0AEFC /* LazyImage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4B8548430D3777B422CB89D59D3B5FF5 /* Pods-LazyImage_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 91536F0E0526D06A0C8130A5CA590190 /* Pods-LazyImage_Tests-dummy.m */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0500FEB621B2A33900C591A0 /* LazyImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyImageView.swift; sourceTree = "<group>"; };
 		050F1DEF20B9A296001942A9 /* LazyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyImage.swift; sourceTree = "<group>"; };
 		08403ECA768C681B9ABB30029CE576F3 /* Pods-LazyImage_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LazyImage_Tests-resources.sh"; sourceTree = "<group>"; };
 		087AE01253D6F361C29B1C32090C9B5A /* Pods-LazyImage_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LazyImage_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				050F1DEF20B9A296001942A9 /* LazyImage.swift */,
+				0500FEB621B2A33900C591A0 /* LazyImageView.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0500FEB721B2A33900C591A0 /* LazyImageView.swift in Sources */,
 				CCBD1136B77606E1192FEE47BC7F25E3 /* LazyImage-dummy.m in Sources */,
 				050F1DF020B9A296001942A9 /* LazyImage.swift in Sources */,
 			);
