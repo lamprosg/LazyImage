@@ -5,7 +5,7 @@
 
 ### LazyImage
 Simple and efficient image lazy loading functionality for the iOS written in Swift.
-LazyImage offers ease of use and complete control over your images.
+LazyImage offers ease of use and complete control over your images by integrating a very light, need-to-have only, code.
 
 
 ### Features
@@ -88,7 +88,7 @@ Without completion closure
 self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png")
 ```
 
-Without completion closure - With spinner
+With spinner
 ```swift
 self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png")
 ```
@@ -100,8 +100,6 @@ self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimag
 //Image loaded. Do something..
 }
 ```
-
-With completion closure - With spinner
 ```swift
 self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png") {
 (error:LazyImageError?) in
@@ -112,12 +110,7 @@ self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.c
 
 #### Show an image with a local image placeholder
 
-Without completion closure
-```swift
-self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName")
-```
-
-With completion closure
+With completion
 ```swift
 self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png", defaultImage:"someLocalImageName") {
 (error:LazyImageError?) in
@@ -128,16 +121,7 @@ self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimag
 
 #### Show an image with scaled size for better performance
 
-With completion closure and new scaled size
-```swift
-let newSize = CGSize(width: imageViewWidth height: imageViewHeight)
-self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimage.png", size:newSize) {
-(error:LazyImageError?) in
-//Image loaded. Do something..
-}
-```
-
-With completion closure - With spinner and new scaled size
+With spinner and new scaled size. Image resized for your desired size for maximum performance
 ```swift
 let newSize = CGSize(width: imageViewWidth height: imageViewHeight)
 self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png", size:newSize) {
@@ -149,7 +133,9 @@ self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.c
 
 #### Force download an image with scaled size even if it is stored in cache
 
-With completion closure and new scaled size
+Sometimes a specific URL can constantly change the corresponding image.
+
+With completion
 ```swift
 let newSize = CGSize(width: imageViewWidth height: imageViewHeight)
 self.lazyImage.showOverride(imageView:self.imageView, url:"http://something.com/someimage.png", size:newSize) {
@@ -158,7 +144,7 @@ self.lazyImage.showOverride(imageView:self.imageView, url:"http://something.com/
 }
 ```
 
-With completion closure - With spinner and new scaled size
+With completion, spinner and new scaled size
 ```swift
 let newSize = CGSize(width: imageViewWidth height: imageViewHeight)
 self.lazyImage.showOverrideWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png", size:newSize) {
@@ -171,7 +157,6 @@ self.lazyImage.showOverrideWithSpinner(imageView:self.imageView, url:"http://som
 #### Clearing the cache for specific image URLs
 
 Sometimes you just need to re-download a specific image with the exact same name once.
-Maybe you know it has changed and the cache has the old one.
 
 Clearing the cache
 ```swift
