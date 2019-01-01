@@ -121,7 +121,7 @@ self.lazyImage.show(imageView:self.imageView, url:"http://something.com/someimag
 
 #### Show an image with scaled size for better performance
 
-With spinner and new scaled size. Image resized for your desired size for maximum performance
+With spinner and new scaled size. Image is resized for your desired size for maximum performance
 ```swift
 let newSize = CGSize(width: imageViewWidth height: imageViewHeight)
 self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png", size:newSize) {
