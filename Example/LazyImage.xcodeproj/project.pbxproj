@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		053EC52421DBF2620042CA9A /* LazyImageExampleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053EC52321DBF2620042CA9A /* LazyImageExampleAppTests.swift */; };
+		053EC53021DBF3380042CA9A /* LazyImageExampleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053EC52C21DBF2F60042CA9A /* LazyImageExampleAppTests.swift */; };
+		053EC53121DBF34B0042CA9A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 053EC52D21DBF2F60042CA9A /* Info.plist */; };
 		057868C821DAA04A001148A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057868C721DAA04A001148A7 /* AppDelegate.swift */; };
 		057868CA21DAA04A001148A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057868C921DAA04A001148A7 /* ViewController.swift */; };
 		057868CF21DAA04B001148A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 057868CE21DAA04B001148A7 /* Assets.xcassets */; };
@@ -27,8 +28,8 @@
 
 /* Begin PBXFileReference section */
 		053EC52121DBF2620042CA9A /* LazyImageExampleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LazyImageExampleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		053EC52321DBF2620042CA9A /* LazyImageExampleAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyImageExampleAppTests.swift; sourceTree = "<group>"; };
-		053EC52521DBF2620042CA9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		053EC52C21DBF2F60042CA9A /* LazyImageExampleAppTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyImageExampleAppTests.swift; sourceTree = "<group>"; };
+		053EC52D21DBF2F60042CA9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		057868C521DAA04A001148A7 /* LazyImageExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LazyImageExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		057868C721DAA04A001148A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		057868C921DAA04A001148A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -65,11 +66,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		053EC52221DBF2620042CA9A /* LazyImageExampleAppTests */ = {
+		053EC52B21DBF2F60042CA9A /* LazyImageExampleAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				053EC52321DBF2620042CA9A /* LazyImageExampleAppTests.swift */,
-				053EC52521DBF2620042CA9A /* Info.plist */,
+				053EC52C21DBF2F60042CA9A /* LazyImageExampleAppTests.swift */,
+				053EC52D21DBF2F60042CA9A /* Info.plist */,
 			);
 			path = LazyImageExampleAppTests;
 			sourceTree = "<group>";
@@ -91,7 +92,7 @@
 			children = (
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				057868C621DAA04A001148A7 /* LazyImageExampleApp */,
-				053EC52221DBF2620042CA9A /* LazyImageExampleAppTests */,
+				053EC52B21DBF2F60042CA9A /* LazyImageExampleAppTests */,
 				607FACD11AFB9204008FA782 /* Products */,
 				C1D92E315D7C759AC6CDB8FC /* Pods */,
 				C01ABEFAA208B0B2511209BB /* Frameworks */,
@@ -224,6 +225,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				053EC53121DBF34B0042CA9A /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				053EC52421DBF2620042CA9A /* LazyImageExampleAppTests.swift in Sources */,
+				053EC53021DBF3380042CA9A /* LazyImageExampleAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
