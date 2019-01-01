@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		053EC53021DBF3380042CA9A /* LazyImageExampleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053EC52C21DBF2F60042CA9A /* LazyImageExampleAppTests.swift */; };
-		053EC53121DBF34B0042CA9A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 053EC52D21DBF2F60042CA9A /* Info.plist */; };
 		057868C821DAA04A001148A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057868C721DAA04A001148A7 /* AppDelegate.swift */; };
 		057868CA21DAA04A001148A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057868C921DAA04A001148A7 /* ViewController.swift */; };
 		057868CF21DAA04B001148A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 057868CE21DAA04B001148A7 /* Assets.xcassets */; };
@@ -225,7 +224,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				053EC53121DBF34B0042CA9A /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
