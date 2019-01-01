@@ -56,9 +56,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "LazyImage_Example.app"
-            BlueprintName = "LazyImage_Example"
+            BlueprintIdentifier = "057868C421DAA04A001148A7"
+            BuildableName = "LazyImageExampleApp.app"
+            BlueprintName = "LazyImageExampleApp"
             ReferencedContainer = "container:LazyImage.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -79,9 +79,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "LazyImage_Example.app"
-            BlueprintName = "LazyImage_Example"
+            BlueprintIdentifier = "057868C421DAA04A001148A7"
+            BuildableName = "LazyImageExampleApp.app"
+            BlueprintName = "LazyImageExampleApp"
             ReferencedContainer = "container:LazyImage.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -98,9 +98,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "LazyImage_Example.app"
-            BlueprintName = "LazyImage_Example"
+            BlueprintIdentifier = "057868C421DAA04A001148A7"
+            BuildableName = "LazyImageExampleApp.app"
+            BlueprintName = "LazyImageExampleApp"
             ReferencedContainer = "container:LazyImage.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -143,10 +143,10 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/LazyImage-iOS8.0/LazyImage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/LazyImage-iOS12.1/LazyImage.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/LazyImage-iOS8.0/LazyImage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/LazyImage-iOS12.1/LazyImage.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

@@ -1,6 +1,9 @@
 use_frameworks!
+
+target 'LazyImageExampleApp' do
+    pod 'LazyImage', :path => '../'
+end
+
 target 'LazyImage_Tests' do
   pod 'LazyImage', :path => '../'
-  
-  
 end

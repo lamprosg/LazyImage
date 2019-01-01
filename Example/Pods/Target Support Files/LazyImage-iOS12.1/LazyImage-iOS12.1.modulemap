@@ -1,5 +1,5 @@
 framework module LazyImage {
-  umbrella header "LazyImage-umbrella.h"
+  umbrella header "LazyImage-iOS12.1-umbrella.h"
 
   export *
   module * { export * }
