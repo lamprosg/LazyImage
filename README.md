@@ -186,5 +186,9 @@ self.lazyImage.zoom(imageView:self.imageView)
 ```swift
 self.lazyImage.blur(imageView:self.imageView, style: UIBlurEffectStyle.Light)
 ```
+
+#### Contributing
+Fork the project. The library comes with a very basic target app for testing your new features. You can find the library code under Pods/LazyImage. 
+
 #### License
 Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
