@@ -72,7 +72,7 @@ func errorDownloadingImage(url:String) -> Void {
 
 ### LazyImage
 
-#### For more options you can use the LazyImage object.
+#### For more options you can use the LazyImage object on any UIImageview.
 
 #### Show an image on an imageView
 
