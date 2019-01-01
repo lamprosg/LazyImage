@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/lamprosg/LazyImage.svg?branch=master)](https://travis-ci.org/lamprosg/LazyImage)
 
 
-### LazyImage
+![LazyImage](LazyImageLogo.png)
 Simple and efficient image lazy loading functionality for the iOS written in Swift.
 LazyImage offers ease of use and complete control over your images by integrating a very light, need-to-have only, code.
 
