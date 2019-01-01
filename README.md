@@ -5,6 +5,7 @@
 
 
 ![LazyImage](LazyImageLogo.png)
+
 Simple and efficient image lazy loading functionality for the iOS written in Swift.
 LazyImage offers ease of use and complete control over your images by integrating a very light, need-to-have only, code.
 
