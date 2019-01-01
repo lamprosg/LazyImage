@@ -11,3 +11,4 @@ before_install:
 - pod lib lint
 - cd Example
 - pod install
+- cd ../
