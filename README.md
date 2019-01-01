@@ -1,10 +1,11 @@
+<p align="center">
+<img src="LazyImageLogo.png" title="LazyImage" float=left>
+</p>
+
 [![Version](https://img.shields.io/cocoapods/v/LazyImage.svg?style=flat&logo=Swift)](https://cocoapods.org/pods/LazyImage)
 [![License](https://img.shields.io/cocoapods/l/LazyImage.svg?style=flat&logo=Swift)](https://cocoapods.org/pods/LazyImage)
 [![Platform](https://img.shields.io/cocoapods/p/LazyImage.svg?style=flat&logo=Swift)](https://cocoapods.org/pods/LazyImage)
 [![Build Status](https://travis-ci.org/lamprosg/LazyImage.svg?branch=master)](https://travis-ci.org/lamprosg/LazyImage)
-
-
-![LazyImage](LazyImageLogo.png)
 
 Simple and efficient image lazy loading functionality for the iOS written in Swift.
 LazyImage offers ease of use and complete control over your images by integrating a very light, need-to-have only, code.
