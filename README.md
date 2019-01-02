@@ -178,7 +178,7 @@ self.lazyImage.fetchImage(url: url) {
 
 
 #### Contributing
-Contributions are welcomed. Fork the project and make it better, then create a pull request. The projects comes with a very basic target app for testing your new features. You can find the library code under Pods/LazyImage. 
+Contributions are welcomed. Fork the project and make it better, then create a pull request. The project comes with a very basic target app for testing your new features. You can find the library code under Pods/LazyImage. 
 
 #### License
 Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
