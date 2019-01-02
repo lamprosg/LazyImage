@@ -39,7 +39,8 @@ pod 'LazyImage'
 
 ### LazyImageView
 
-The simplest way to show an image on an image view is by setting the type to LazyImageView and setting the imageURL property
+The simplest way to show an image on an image view is by setting the type to LazyImageView and setting the imageURL property.
+The downloaded image will be resized to your image view size for best performance.
 
 Example:
 ```swift
