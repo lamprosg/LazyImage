@@ -26,8 +26,6 @@ LazyImage offers ease of use and complete control over your images by integratin
 instead of force downloading them continuously.
 * Notifies the caller when the operation is complete providing **descriptive error if any**.
 * Image can be **scaled** to your specific view dimensions for best performance and **reduced memory allocation**.
-* Image can be zoomed to full screen
-* Image can be blurred
 
 
 
@@ -41,7 +39,7 @@ pod 'LazyImage'
 
 ### LazyImageView
 
-The simplest way to show an image on an image view is by setting the imageURL property
+The simplest way to show an image on an image view is by setting the type to LazyImageView and setting the imageURL property
 
 Example:
 ```swift
@@ -177,20 +175,9 @@ self.lazyImage.fetchImage(url: url) {
 }
 ```
 
-### Extra options
-
-#### Zoom the image
-```swift
-self.lazyImage.zoom(imageView:self.imageView)
-```
-
-#### Blur the image (iOS 8 and above)
-```swift
-self.lazyImage.blur(imageView:self.imageView, style: UIBlurEffectStyle.Light)
-```
 
 #### Contributing
-Fork the project. The library comes with a very basic target app for testing your new features. You can find the library code under Pods/LazyImage. 
+Contributions are welcomed. Fork the project and make it better, then create a pull request. The projects comes with a very basic target app for testing your new features. You can find the library code under Pods/LazyImage. 
 
 #### License
 Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0

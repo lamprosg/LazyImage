@@ -12,7 +12,8 @@
 		057868CA21DAA04A001148A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057868C921DAA04A001148A7 /* ViewController.swift */; };
 		057868CF21DAA04B001148A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 057868CE21DAA04B001148A7 /* Assets.xcassets */; };
 		057868D221DAA04B001148A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 057868D021DAA04B001148A7 /* LaunchScreen.storyboard */; };
-		13C1218CCBCE132E0A7686DD /* Pods_LazyImageExampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF38AAC2C934AC9AE5279151 /* Pods_LazyImageExampleApp.framework */; };
+		087AF3AFCB76E75B0230C696 /* Pods_LazyImageExampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7550AE81A7906FEFE240AA60 /* Pods_LazyImageExampleApp.framework */; };
+		35D767CBB3156970EB3C9D68 /* Pods_LazyImageExampleAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB18CE3320046967C3904BBB /* Pods_LazyImageExampleAppTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,13 +38,15 @@
 		057868D321DAA04B001148A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F3415CABEC4DA547DB09DF8 /* Pods-LazyImageExampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazyImageExampleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-LazyImageExampleApp/Pods-LazyImageExampleApp.release.xcconfig"; sourceTree = "<group>"; };
 		5FA1499929F602461A34EB07 /* LazyImage.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LazyImage.podspec; path = ../LazyImage.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		7550AE81A7906FEFE240AA60 /* Pods_LazyImageExampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LazyImageExampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ACDEF3FB32477B2AEF64D32 /* Pods-LazyImage_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazyImage_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LazyImage_Tests/Pods-LazyImage_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		7B5F5B85220116A4D792E465 /* Pods_LazyImage_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LazyImage_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C9785F860A3CD6CC3C3A9D0 /* Pods-LazyImageExampleAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazyImageExampleAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LazyImageExampleAppTests/Pods-LazyImageExampleAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A3237A7D248867DAA57C16AA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		B72D9301D659945EEA509569 /* Pods-LazyImageExampleAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazyImageExampleAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LazyImageExampleAppTests/Pods-LazyImageExampleAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		CB18CE3320046967C3904BBB /* Pods_LazyImageExampleAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LazyImageExampleAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC4F4874B1F60039EE0B3D26 /* Pods-LazyImage_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazyImage_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LazyImage_Tests/Pods-LazyImage_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		DDA2C4993EC117EA285DEA63 /* Pods-LazyImageExampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazyImageExampleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LazyImageExampleApp/Pods-LazyImageExampleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		F67D90AF1E46DB2EB9BFC8B5 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		FF38AAC2C934AC9AE5279151 /* Pods_LazyImageExampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LazyImageExampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35D767CBB3156970EB3C9D68 /* Pods_LazyImageExampleAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,7 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13C1218CCBCE132E0A7686DD /* Pods_LazyImageExampleApp.framework in Frameworks */,
+				087AF3AFCB76E75B0230C696 /* Pods_LazyImageExampleApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,8 +124,8 @@
 		C01ABEFAA208B0B2511209BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7B5F5B85220116A4D792E465 /* Pods_LazyImage_Tests.framework */,
-				FF38AAC2C934AC9AE5279151 /* Pods_LazyImageExampleApp.framework */,
+				7550AE81A7906FEFE240AA60 /* Pods_LazyImageExampleApp.framework */,
+				CB18CE3320046967C3904BBB /* Pods_LazyImageExampleAppTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -133,6 +137,8 @@
 				7ACDEF3FB32477B2AEF64D32 /* Pods-LazyImage_Tests.release.xcconfig */,
 				DDA2C4993EC117EA285DEA63 /* Pods-LazyImageExampleApp.debug.xcconfig */,
 				0F3415CABEC4DA547DB09DF8 /* Pods-LazyImageExampleApp.release.xcconfig */,
+				8C9785F860A3CD6CC3C3A9D0 /* Pods-LazyImageExampleAppTests.debug.xcconfig */,
+				B72D9301D659945EEA509569 /* Pods-LazyImageExampleAppTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -144,6 +150,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 053EC52821DBF2620042CA9A /* Build configuration list for PBXNativeTarget "LazyImageExampleAppTests" */;
 			buildPhases = (
+				3232273AB34F43E02D750DC8 /* [CP] Check Pods Manifest.lock */,
 				053EC51D21DBF2620042CA9A /* Sources */,
 				053EC51E21DBF2620042CA9A /* Frameworks */,
 				053EC51F21DBF2620042CA9A /* Resources */,
@@ -248,7 +255,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LazyImageExampleApp/Pods-LazyImageExampleApp-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/LazyImage-iOS12.1/LazyImage.framework",
+				"${BUILT_PRODUCTS_DIR}/LazyImage/LazyImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -259,6 +266,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LazyImageExampleApp/Pods-LazyImageExampleApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3232273AB34F43E02D750DC8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LazyImageExampleAppTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		762DDC83F0E3C9B6B1ACEAA5 /* [CP] Check Pods Manifest.lock */ = {
@@ -327,6 +356,7 @@
 /* Begin XCBuildConfiguration section */
 		053EC52921DBF2620042CA9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C9785F860A3CD6CC3C3A9D0 /* Pods-LazyImageExampleAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -356,6 +386,7 @@
 		};
 		053EC52A21DBF2620042CA9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B72D9301D659945EEA509569 /* Pods-LazyImageExampleAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -482,7 +513,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -530,7 +561,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

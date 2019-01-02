@@ -1,0 +1,6 @@
+framework module Pods_LazyImageExampleAppTests {
+  umbrella header "Pods-LazyImageExampleAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

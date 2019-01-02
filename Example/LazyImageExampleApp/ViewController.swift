@@ -20,13 +20,17 @@ class ViewController: UIViewController {
         let imageView:UIImageView = self.addAnImageview()
         
         //Test image URL. Change with a valid one.
-        let imageURL = "https://wallpaper-house.com/data/out/6/wallpaper2you_118327.jpg"
+        let imageURL = "https://images.unsplash.com/photo-1506145953600-ed38ef5a186d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
         
         //Clear the cache to test download again
         self.lazyImage.clearCacheForURLs(urls: [imageURL])
         
         //Downlod the image
-        self.lazyImage.showWithSpinner(imageView: imageView, url: imageURL)
+        self.lazyImage.showWithSpinner(imageView: imageView, url: imageURL) {
+            (error:LazyImageError?) in
+            
+            //Image loaded. Do something..
+        }
     }
     
     //MARK: - Helper methods

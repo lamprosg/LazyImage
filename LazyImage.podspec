@@ -46,7 +46,7 @@ Image can be blurred
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   s.swift_version    = '4.2'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'Library/*'
   

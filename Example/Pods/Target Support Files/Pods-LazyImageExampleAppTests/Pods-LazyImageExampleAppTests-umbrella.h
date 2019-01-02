@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double LazyImageVersionNumber;
-FOUNDATION_EXPORT const unsigned char LazyImageVersionString[];
+FOUNDATION_EXPORT double Pods_LazyImageExampleAppTestsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_LazyImageExampleAppTestsVersionString[];
 
