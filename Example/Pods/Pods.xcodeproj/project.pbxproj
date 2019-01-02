@@ -7,22 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		058449F121DCB9990069C4A5 /* LazyImage+Resizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058449F021DCB9990069C4A5 /* LazyImage+Resizing.swift */; };
-		2C1CC2EC6B626C2A6983303FF89FA270 /* LazyImage+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604ECDFFB764363D9389A304CEAB02EE /* LazyImage+Storage.swift */; };
+		44F8C134283D641F1B74C2FE2C35260A /* LazyImage+Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4828E38E44282D7DE48FE95910825050 /* LazyImage+Loader.swift */; };
 		49C00D472D9D4116AC776478E40D0F5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
 		5778530499371FC8DFF61FF4934AE4EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
+		57E74046FF8B41345F137A79AF24FBD3 /* LazyImage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E09A77ABB12425B70EB682225729C0F5 /* LazyImage-dummy.m */; };
+		6532B600BE1B66AFE4A46B06A4C8CE9C /* LazyImage+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2AA12C4AB2037FD50EA0EE54B7FBA3 /* LazyImage+Error.swift */; };
 		7089E36C99DF8B1397A0AF31C2D507F2 /* Pods-LazyImageExampleAppTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 562F915A20B2396760442BDBD0F57B25 /* Pods-LazyImageExampleAppTests-dummy.m */; };
-		844CEC2FD15451DC26799CBF6019706E /* LazyImage+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FE05A98273ED1DF2AAE3B5C040C360 /* LazyImage+Network.swift */; };
+		70F330DC03435B4263BCA406904D7665 /* LazyImage+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1C5E1DDBF279F3AC7D79012A4BB3B5 /* LazyImage+Storage.swift */; };
+		930EECD524E8F4DBEC7AAF2161A8AF01 /* LazyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA58FDA120F32E93BEC29421549FCD0D /* LazyImageView.swift */; };
 		A4B14C50F7B8581D0367C0F82E2E957E /* Pods-LazyImageExampleApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A29AD1A92BE57145C2F2635592EE6326 /* Pods-LazyImageExampleApp-dummy.m */; };
-		A6C7F545517DD73E2147438B2CEC4D57 /* LazyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B8F66D60C9143AD17015A21EF40D8A /* LazyImageView.swift */; };
 		AB57FE3316969EEA444CD83CC0F73FCA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
-		BEAD8BE278C0EC53BF30ACD2E786591F /* LazyImage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D1797003ED12099BCC9486640919A8 /* LazyImage-dummy.m */; };
-		CB1A6331EC98828B78FD2C8AFCE03298 /* LazyImage+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB85B8E840694A46FC3881175FC8E4 /* LazyImage+Error.swift */; };
-		D8E5CA0E3B525876576394B8ADD28064 /* LazyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71A991774029830C938F4C7E9C59102 /* LazyImage.swift */; };
+		BF4A34DACE8076FABE160F4B31836CF4 /* LazyImage+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B8DB8D7AB04306D37654580A3EBA8 /* LazyImage+Network.swift */; };
 		E7192B8AFB6B24EE936155AC6077088E /* Pods-LazyImageExampleAppTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F3D452E7C0D82F4AE4F51D6FD9108CC5 /* Pods-LazyImageExampleAppTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E888984B6DEEEA64796A831D303A51D0 /* LazyImage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 911F345923A57747D8DB1C87F65BB033 /* LazyImage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E888984B6DEEEA64796A831D303A51D0 /* LazyImage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DE8BC5AB668C7D41F16E144F0D2CC3A2 /* LazyImage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EFA96FE38453ACAF4058C48C94332587 /* LazyImage+Resizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788C49263FE5C92E8D028B926B0EFE0E /* LazyImage+Resizing.swift */; };
 		F2BED0BB76E5696278351672184FCF8E /* Pods-LazyImageExampleApp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BBD4D62E4DEA562480832CAE45614EC9 /* Pods-LazyImageExampleApp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F306E2A681FCE621C04C348C99B6874C /* LazyImage+Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514C33E3523AE01A95E1C8DD0F09566 /* LazyImage+Loader.swift */; };
+		F889B48F498D7C40BABE21E992EC440F /* LazyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27ECA36892990ECA70C594E894EE74 /* LazyImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,45 +37,45 @@
 
 /* Begin PBXFileReference section */
 		0553C97FA4CFB2627B12D76969E8BC94 /* Pods-LazyImageExampleAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LazyImageExampleAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		058449F021DCB9990069C4A5 /* LazyImage+Resizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "LazyImage+Resizing.swift"; path = "Library/LazyImage+Resizing.swift"; sourceTree = "<group>"; };
+		117B00D2274A016BD7BBDBB122BA73F6 /* LazyImage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LazyImage-prefix.pch"; sourceTree = "<group>"; };
+		1777704FAF2FA1EAD6F3245AADEA0C59 /* LazyImage.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = LazyImage.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		1ED5486945BD1C8299FC1212D9A33DD4 /* Pods-LazyImageExampleAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LazyImageExampleAppTests.debug.xcconfig"; sourceTree = "<group>"; };
-		20D1797003ED12099BCC9486640919A8 /* LazyImage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LazyImage-dummy.m"; sourceTree = "<group>"; };
-		2B8DA6CD74E9BE9AF44A974BD509822F /* Pods_LazyImageExampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LazyImageExampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A74D18C6EF565B9585EABD47CD58765 /* LazyImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LazyImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F26E9E50B29921941C288BB30937C8F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		43704622E7B015A3EACA93944D03211C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		2B8DA6CD74E9BE9AF44A974BD509822F /* Pods_LazyImageExampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_LazyImageExampleApp.framework; path = "Pods-LazyImageExampleApp.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3639A9846BC76E6F7D03239AB74181D3 /* LazyImage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LazyImage.xcconfig; sourceTree = "<group>"; };
+		3A74D18C6EF565B9585EABD47CD58765 /* LazyImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LazyImage.framework; path = LazyImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D2AA12C4AB2037FD50EA0EE54B7FBA3 /* LazyImage+Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LazyImage+Error.swift"; path = "Library/LazyImage+Error.swift"; sourceTree = "<group>"; };
+		479194CB74C905BCA7FE927C33F57F79 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4828E38E44282D7DE48FE95910825050 /* LazyImage+Loader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LazyImage+Loader.swift"; path = "Library/LazyImage+Loader.swift"; sourceTree = "<group>"; };
 		49C849842723FDA4315563AD6D9E2CC2 /* Pods-LazyImageExampleAppTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LazyImageExampleAppTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		5487F4D5DC9D3E9DC309BDA216148A97 /* Pods-LazyImageExampleAppTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LazyImageExampleAppTests.modulemap"; sourceTree = "<group>"; };
 		562F915A20B2396760442BDBD0F57B25 /* Pods-LazyImageExampleAppTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LazyImageExampleAppTests-dummy.m"; sourceTree = "<group>"; };
 		59722D08F439F724E818B27A60B00FCC /* Pods-LazyImageExampleApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LazyImageExampleApp-acknowledgements.markdown"; sourceTree = "<group>"; };
 		5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		5E09634020F695ADA658A1030EC25033 /* LazyImage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LazyImage.xcconfig; sourceTree = "<group>"; };
+		5C1C5E1DDBF279F3AC7D79012A4BB3B5 /* LazyImage+Storage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LazyImage+Storage.swift"; path = "Library/LazyImage+Storage.swift"; sourceTree = "<group>"; };
 		5E8F31431D4BF982E61D37D82E44520B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5ED6BDB065E0D57382E0956E5AA24BAC /* Pods-LazyImageExampleApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LazyImageExampleApp-frameworks.sh"; sourceTree = "<group>"; };
-		604ECDFFB764363D9389A304CEAB02EE /* LazyImage+Storage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LazyImage+Storage.swift"; path = "Library/LazyImage+Storage.swift"; sourceTree = "<group>"; };
-		65F93D64A1621E5D89538FE0415436F8 /* LazyImage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LazyImage.modulemap; sourceTree = "<group>"; };
-		7E6E75D8C4F26035819DFCC7B809CC02 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		911F345923A57747D8DB1C87F65BB033 /* LazyImage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LazyImage-umbrella.h"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		629B6BEA5553F6A6DD3343D8896675A2 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		788C49263FE5C92E8D028B926B0EFE0E /* LazyImage+Resizing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LazyImage+Resizing.swift"; path = "Library/LazyImage+Resizing.swift"; sourceTree = "<group>"; };
+		8D7B8DB8D7AB04306D37654580A3EBA8 /* LazyImage+Network.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LazyImage+Network.swift"; path = "Library/LazyImage+Network.swift"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		993A86A47C5621C355DBFC6B87870FB4 /* Pods-LazyImageExampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LazyImageExampleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		9A58F81678CEDD78754B25CC1A3235E0 /* Pods-LazyImageExampleApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LazyImageExampleApp-acknowledgements.plist"; sourceTree = "<group>"; };
 		9BF52D4D8134C06EDCA2BB207B4023A1 /* Pods-LazyImageExampleAppTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LazyImageExampleAppTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		A29AD1A92BE57145C2F2635592EE6326 /* Pods-LazyImageExampleApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LazyImageExampleApp-dummy.m"; sourceTree = "<group>"; };
-		A71A991774029830C938F4C7E9C59102 /* LazyImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LazyImage.swift; path = Library/LazyImage.swift; sourceTree = "<group>"; };
+		AA27ECA36892990ECA70C594E894EE74 /* LazyImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LazyImage.swift; path = Library/LazyImage.swift; sourceTree = "<group>"; };
 		AF675C41C4BA6163210C2A19B0BCCAF3 /* Pods-LazyImageExampleApp-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LazyImageExampleApp-resources.sh"; sourceTree = "<group>"; };
 		B254C63E83E6502EFC552DC15C107263 /* Pods-LazyImageExampleAppTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LazyImageExampleAppTests-resources.sh"; sourceTree = "<group>"; };
 		B40929911EACE3A1611C5558C561A3F4 /* Pods-LazyImageExampleApp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LazyImageExampleApp.modulemap"; sourceTree = "<group>"; };
+		BA91CF674F42718A3ECBF1EAD0D86732 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		BB41D5DC47AAA4524476F23C0ED3B39D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBD4D62E4DEA562480832CAE45614EC9 /* Pods-LazyImageExampleApp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LazyImageExampleApp-umbrella.h"; sourceTree = "<group>"; };
-		C14E3E4525FF57C2737DDE204B0F33A1 /* Pods_LazyImageExampleAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LazyImageExampleAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C14E3E4525FF57C2737DDE204B0F33A1 /* Pods_LazyImageExampleAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_LazyImageExampleAppTests.framework; path = "Pods-LazyImageExampleAppTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD189D20FC883B8DB8706C2F5E53C2E2 /* Pods-LazyImageExampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LazyImageExampleApp.release.xcconfig"; sourceTree = "<group>"; };
-		D5A0E85345F51FDDC017C935BD0A7983 /* LazyImage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LazyImage-prefix.pch"; sourceTree = "<group>"; };
-		DAFB85B8E840694A46FC3881175FC8E4 /* LazyImage+Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LazyImage+Error.swift"; path = "Library/LazyImage+Error.swift"; sourceTree = "<group>"; };
-		EC37C37C04005407837E04FB4A54F1C5 /* LazyImage.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = LazyImage.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		F2B8F66D60C9143AD17015A21EF40D8A /* LazyImageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LazyImageView.swift; path = Library/LazyImageView.swift; sourceTree = "<group>"; };
+		DE8BC5AB668C7D41F16E144F0D2CC3A2 /* LazyImage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LazyImage-umbrella.h"; sourceTree = "<group>"; };
+		E09A77ABB12425B70EB682225729C0F5 /* LazyImage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LazyImage-dummy.m"; sourceTree = "<group>"; };
+		EA58FDA120F32E93BEC29421549FCD0D /* LazyImageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LazyImageView.swift; path = Library/LazyImageView.swift; sourceTree = "<group>"; };
 		F3D452E7C0D82F4AE4F51D6FD9108CC5 /* Pods-LazyImageExampleAppTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LazyImageExampleAppTests-umbrella.h"; sourceTree = "<group>"; };
-		F514C33E3523AE01A95E1C8DD0F09566 /* LazyImage+Loader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LazyImage+Loader.swift"; path = "Library/LazyImage+Loader.swift"; sourceTree = "<group>"; };
-		F7FE05A98273ED1DF2AAE3B5C040C360 /* LazyImage+Network.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LazyImage+Network.swift"; path = "Library/LazyImage+Network.swift"; sourceTree = "<group>"; };
+		FD39902E07D2920727BBE31CAF091495 /* LazyImage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LazyImage.modulemap; sourceTree = "<group>"; };
 		FE20D92E0DB01627419D4E4B92A2762A /* Pods-LazyImageExampleAppTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LazyImageExampleAppTests-frameworks.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,20 +107,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		083054AF7ADF998542DB4DD25A2F1494 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				7E6E75D8C4F26035819DFCC7B809CC02 /* Info.plist */,
-				65F93D64A1621E5D89538FE0415436F8 /* LazyImage.modulemap */,
-				5E09634020F695ADA658A1030EC25033 /* LazyImage.xcconfig */,
-				20D1797003ED12099BCC9486640919A8 /* LazyImage-dummy.m */,
-				D5A0E85345F51FDDC017C935BD0A7983 /* LazyImage-prefix.pch */,
-				911F345923A57747D8DB1C87F65BB033 /* LazyImage-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/LazyImage";
-			sourceTree = "<group>";
-		};
 		4D1C99EBFF6C3544241B1FBF70ACC81B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,21 +163,18 @@
 			path = "Target Support Files/Pods-LazyImageExampleAppTests";
 			sourceTree = "<group>";
 		};
-		B62992BE27F63D45CF37603980E1AADD /* LazyImage */ = {
+		876E851F2C54BB9B5E962BDF4A4433B2 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				A71A991774029830C938F4C7E9C59102 /* LazyImage.swift */,
-				058449F021DCB9990069C4A5 /* LazyImage+Resizing.swift */,
-				DAFB85B8E840694A46FC3881175FC8E4 /* LazyImage+Error.swift */,
-				F514C33E3523AE01A95E1C8DD0F09566 /* LazyImage+Loader.swift */,
-				F7FE05A98273ED1DF2AAE3B5C040C360 /* LazyImage+Network.swift */,
-				604ECDFFB764363D9389A304CEAB02EE /* LazyImage+Storage.swift */,
-				F2B8F66D60C9143AD17015A21EF40D8A /* LazyImageView.swift */,
-				DD3D8917FBF53073AA4BD7D753BCC73B /* Pod */,
-				083054AF7ADF998542DB4DD25A2F1494 /* Support Files */,
+				479194CB74C905BCA7FE927C33F57F79 /* Info.plist */,
+				FD39902E07D2920727BBE31CAF091495 /* LazyImage.modulemap */,
+				3639A9846BC76E6F7D03239AB74181D3 /* LazyImage.xcconfig */,
+				E09A77ABB12425B70EB682225729C0F5 /* LazyImage-dummy.m */,
+				117B00D2274A016BD7BBDBB122BA73F6 /* LazyImage-prefix.pch */,
+				DE8BC5AB668C7D41F16E144F0D2CC3A2 /* LazyImage-umbrella.h */,
 			);
-			name = LazyImage;
-			path = ../..;
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/LazyImage";
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -202,20 +185,37 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BD3AF957140A9F614C59FC7F62309C6E /* LazyImage */ = {
+			isa = PBXGroup;
+			children = (
+				AA27ECA36892990ECA70C594E894EE74 /* LazyImage.swift */,
+				3D2AA12C4AB2037FD50EA0EE54B7FBA3 /* LazyImage+Error.swift */,
+				4828E38E44282D7DE48FE95910825050 /* LazyImage+Loader.swift */,
+				8D7B8DB8D7AB04306D37654580A3EBA8 /* LazyImage+Network.swift */,
+				788C49263FE5C92E8D028B926B0EFE0E /* LazyImage+Resizing.swift */,
+				5C1C5E1DDBF279F3AC7D79012A4BB3B5 /* LazyImage+Storage.swift */,
+				EA58FDA120F32E93BEC29421549FCD0D /* LazyImageView.swift */,
+				DBAC7E57B78AEF638A4D76B944D9628F /* Pod */,
+				876E851F2C54BB9B5E962BDF4A4433B2 /* Support Files */,
+			);
+			name = LazyImage;
+			path = ../..;
+			sourceTree = "<group>";
+		};
 		D8CCB697C3559A93F826C01AFF686C88 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B62992BE27F63D45CF37603980E1AADD /* LazyImage */,
+				BD3AF957140A9F614C59FC7F62309C6E /* LazyImage */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		DD3D8917FBF53073AA4BD7D753BCC73B /* Pod */ = {
+		DBAC7E57B78AEF638A4D76B944D9628F /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				EC37C37C04005407837E04FB4A54F1C5 /* LazyImage.podspec */,
-				43704622E7B015A3EACA93944D03211C /* LICENSE */,
-				3F26E9E50B29921941C288BB30937C8F /* README.md */,
+				1777704FAF2FA1EAD6F3245AADEA0C59 /* LazyImage.podspec */,
+				629B6BEA5553F6A6DD3343D8896675A2 /* LICENSE */,
+				BA91CF674F42718A3ECBF1EAD0D86732 /* README.md */,
 			);
 			name = Pod;
 			sourceTree = "<group>";
@@ -273,7 +273,7 @@
 			buildConfigurationList = BC0EFC57FB6E498F73E81E9D36F73AFB /* Build configuration list for PBXNativeTarget "LazyImage" */;
 			buildPhases = (
 				EAC4805A744528F5B3213A0E24A733D0 /* Headers */,
-				0DE025FD73190500BAB7B680CB6BF394 /* Sources */,
+				5DB73E1BC11502455DF1FA4F4DEB5F68 /* Sources */,
 				6A54AF12EB13AAF0B8B4B3F2B93AE8B2 /* Frameworks */,
 				31120715E8107FAE87EF057B7540E39C /* Resources */,
 			);
@@ -330,7 +330,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 0930;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -376,18 +376,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0DE025FD73190500BAB7B680CB6BF394 /* Sources */ = {
+		5DB73E1BC11502455DF1FA4F4DEB5F68 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB1A6331EC98828B78FD2C8AFCE03298 /* LazyImage+Error.swift in Sources */,
-				F306E2A681FCE621C04C348C99B6874C /* LazyImage+Loader.swift in Sources */,
-				844CEC2FD15451DC26799CBF6019706E /* LazyImage+Network.swift in Sources */,
-				2C1CC2EC6B626C2A6983303FF89FA270 /* LazyImage+Storage.swift in Sources */,
-				058449F121DCB9990069C4A5 /* LazyImage+Resizing.swift in Sources */,
-				BEAD8BE278C0EC53BF30ACD2E786591F /* LazyImage-dummy.m in Sources */,
-				D8E5CA0E3B525876576394B8ADD28064 /* LazyImage.swift in Sources */,
-				A6C7F545517DD73E2147438B2CEC4D57 /* LazyImageView.swift in Sources */,
+				6532B600BE1B66AFE4A46B06A4C8CE9C /* LazyImage+Error.swift in Sources */,
+				44F8C134283D641F1B74C2FE2C35260A /* LazyImage+Loader.swift in Sources */,
+				BF4A34DACE8076FABE160F4B31836CF4 /* LazyImage+Network.swift in Sources */,
+				EFA96FE38453ACAF4058C48C94332587 /* LazyImage+Resizing.swift in Sources */,
+				70F330DC03435B4263BCA406904D7665 /* LazyImage+Storage.swift in Sources */,
+				57E74046FF8B41345F137A79AF24FBD3 /* LazyImage-dummy.m in Sources */,
+				F889B48F498D7C40BABE21E992EC440F /* LazyImage.swift in Sources */,
+				930EECD524E8F4DBEC7AAF2161A8AF01 /* LazyImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,7 +421,7 @@
 /* Begin XCBuildConfiguration section */
 		0A19519453B6C7BFA6958D8FEC988DB4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5E09634020F695ADA658A1030EC25033 /* LazyImage.xcconfig */;
+			baseConfigurationReference = 3639A9846BC76E6F7D03239AB74181D3 /* LazyImage.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -444,7 +444,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -641,14 +642,13 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
 		};
 		BCEC6C82D710C21C74BDF2B975F34070 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5E09634020F695ADA658A1030EC25033 /* LazyImage.xcconfig */;
+			baseConfigurationReference = 3639A9846BC76E6F7D03239AB74181D3 /* LazyImage.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -707,7 +707,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
