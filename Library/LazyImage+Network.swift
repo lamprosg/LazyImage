@@ -9,6 +9,11 @@ extension LazyImage {
 
     //MARK: - Call
     
+    /// Method for fetching the image for a specific URL.
+    ///
+    /// - Parameters:
+    ///   - url: The corresponding URL of the image
+    ///   - completion: Closure with the image or error if any
     public func fetchImage(url:String?, completion: @escaping (_ image:UIImage?, _ error:LazyImageError?) -> Void) -> Void {
         
         guard let url = url else {
@@ -29,8 +34,8 @@ extension LazyImage {
         
         backgroundQueue.async(execute: {
             
-            let session:URLSession = URLSession(configuration: URLSessionConfiguration.default)
-            let task = session.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
+            self.session = URLSession(configuration: URLSessionConfiguration.default)
+            let task = self.session?.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
                 
                 if response != nil {
                     let httpResponse:HTTPURLResponse = response as! HTTPURLResponse
@@ -61,7 +66,22 @@ extension LazyImage {
                 completion(UIImage(data:data!), nil)
                 return
             })
-            task.resume()
+            task?.resume()
         })
+    }
+    
+    //MARK: - Cancel session
+    
+    /// Cancels the image request.
+    ///
+    /// - Returns: true if there is a valid session
+    public func cancel() -> Bool {
+        
+        guard let _ = self.session else {
+            return false
+        }
+        self.session?.invalidateAndCancel()
+        self.session = nil
+        return true
     }
 }

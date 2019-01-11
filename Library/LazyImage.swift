@@ -22,6 +22,9 @@ open class LazyImage: NSObject {
     var forceDownload:Bool = false          // Flag to force download an image even if it is cached on the disk
     var spinner:UIActivityIndicatorView?    // Actual spinner
     var desiredImageSize:CGSize?
+
+    /// The URL session request
+    var session:URLSession?
     
     //MARK: - Image lazy loading
     

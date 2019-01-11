@@ -72,4 +72,13 @@ open class LazyImageView: UIImageView {
             }
         }
     }
+    
+    //MARK: - Cancel the request
+    
+    /// Cancels the image request.
+    ///
+    /// - Returns: true if there is a valid session
+    public func cancelRequest() -> Bool {
+        return self.lazyImage.cancel()
+    }
 }

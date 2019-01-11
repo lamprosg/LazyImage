@@ -51,6 +51,12 @@ imageview.image = UIImage(named:"someAsset")
 
 //Network image
 imageView.imageURL = "https://domain.com/thepathtotheimage.png"
+
+//Option to enable force download
+imageView.forceDownload = true //default: false
+
+//Option to cancel the request
+let canceled = imageView.cancelRequest()
 ```
 
 In case you want to know if the image fails to be retrieved.
@@ -176,6 +182,11 @@ self.lazyImage.fetchImage(url: url) {
 }
 ```
 
+#### Cancel the image fetching request
+
+```swift
+self.lazyImage.cancel()
+```
 
 #### Contributing
 Contributions are welcomed. Fork the project and make it better, then create a pull request. The project comes with a very basic target app for testing your new features. You can find the library code under Pods/LazyImage. 

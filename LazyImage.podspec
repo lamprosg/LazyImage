@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'LazyImage'
-  s.version          = '6.7.2'
+  s.version          = '6.7.3'
   s.summary          = 'Simple and efficient image lazy loading for iOS written in Swift'
 
 # This description is used to generate tags and improve search results.
