@@ -160,7 +160,7 @@ self.lazyImage.showOverrideWithSpinner(imageView:self.imageView, url:"http://som
 }
 ```
 
-#### Dealing with the image size and the cache
+### Dealing with the image size and the cache
 
 In general showing an image optimized for your view dimensions is the best approach for optimal memory handling . You can achieve this in 2 ways.
 
@@ -173,7 +173,7 @@ self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.c
 //Image loaded. Do something..
 }
 ```
-* Setting the cache size is the second option. Valid as long as your instance is alive, this will cause the images to be stored resized in the cache. Loading your fresh resized images for you specific dimensions will be super fast  🚀.
+* **Setting the cache size** is the second option. Valid as long as your instance is alive, this will cause the images to be stored resized in the cache. Loading your fresh resized images for you specific dimensions will be super fast  🚀.
 
 ```swift
 let imageSize = CGSize(width: yourViewWidth, height: yourViewHeight)
@@ -190,7 +190,8 @@ self.lazyImage.showWithSpinner(imageView:self, url:imageURL) {
 
 Sometimes you just need to re-download a specific image with the exact same name once.
 
-If you have  a cache size set, clearing the cache will clear images of the specific size ratio
+If you have  a cache size set, clearing the cache will clear images of the specific size ratio.
+
 Clearing the cache:
 ```swift
 let imageURLs:[String] = ["https://someimage.png", "https://someotherimage.png"]
