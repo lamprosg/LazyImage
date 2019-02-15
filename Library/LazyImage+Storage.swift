@@ -35,7 +35,13 @@ extension LazyImage {
     /// - Parameter name: The unique name of the image
     /// - Returns: Returns the storage path
     func storagePathforImageName(name:String) -> String {
-        return String(format:"%@/%@", NSTemporaryDirectory(), name)
+
+        var path = String(format:"%@/%@", NSTemporaryDirectory(), name)
+
+        if let cacheSize = self.cacheSize {
+            path = path + "\(cacheSize.width)" + "x" + "\(cacheSize.height)"
+        }
+        return path
     }
     
     /// Saves an image to a given storage path
@@ -49,7 +55,13 @@ extension LazyImage {
         var error: Error?
         
         do {
-            try image.pngData()!.write(to: URL(fileURLWithPath: imagePath), options: [])
+            var imageToBeSaved:UIImage = image
+
+            if let cacheSize = self.cacheSize,
+               !image.size.equalTo(cacheSize) {
+                imageToBeSaved = self.resize(image: image, targetSize: cacheSize)
+            }
+            try imageToBeSaved.pngData()!.write(to: URL(fileURLWithPath: imagePath), options: [])
         } catch let error1 {
             error = error1
             if let actualError = error {

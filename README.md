@@ -25,8 +25,8 @@ LazyImage offers ease of use and complete control over your images by integratin
 * Option for **clearing images from the cache** which correspond to **specific URLs** so they can be re-downloaded once,
 instead of force downloading them continuously.
 * Notifies the caller when the operation is complete providing **descriptive error if any**.
-* Image can be **scaled** to your specific view dimensions for best performance and **reduced memory allocation**.
-
+* Image can be **scaled automatically** to your specific view dimensions for best performance and **reduced memory allocation**.
+* Option for setting the **cache image size** ratio for saving images to you **needed dimensions for fast display**.
 
 
 ### Installation - Cocoapods
@@ -40,7 +40,7 @@ pod 'LazyImage'
 ### LazyImageView
 
 The simplest way to show an image on an image view is by setting the type to LazyImageView and setting the imageURL property.
-The downloaded image will be resized to your image view size for best performance.
+The downloaded image will be cached to your image view size for best performance.
 
 Example:
 ```swift
@@ -51,9 +51,6 @@ imageview.image = UIImage(named:"someAsset")
 
 //Network image
 imageView.imageURL = "https://domain.com/thepathtotheimage.png"
-
-//Option to enable force download
-imageView.forceDownload = true //default: false
 
 //Option to cancel the request
 let canceled = imageView.cancelRequest()
@@ -80,7 +77,9 @@ func errorDownloadingImage(url:String) -> Void {
 
 ### LazyImage
 
-#### For more options you can use the LazyImage object on any UIImageview.
+#### For comlete control you can use the LazyImage object on any UIImageview.
+
+#### Below are some exampes of loading images
 
 #### Show an image on an imageView
 
@@ -161,16 +160,50 @@ self.lazyImage.showOverrideWithSpinner(imageView:self.imageView, url:"http://som
 }
 ```
 
+#### Dealing with the image size and the cache
+
+In general showing an image optimized for your view dimensions is the best approach for optimal memory handling . You can achieve this in 2 ways.
+
+* Using the size parameter as shown in the above examples. The size will be used to scale down the image for your specific size. This will happen on the fly, which means the original image is stored in the cache. Resizing will be performed upon load.
+
+```swift
+let newSize = CGSize(width: imageViewWidth height: imageViewHeight)
+self.lazyImage.showWithSpinner(imageView:self.imageView, url:"http://something.com/someimage.png", size:newSize) {
+(error:LazyImageError?) in
+//Image loaded. Do something..
+}
+```
+* Setting the cache size is the second option. Valid as long as your instance is alive, this will cause the images to be stored resized in the cache. Loading your fresh resized images for you specific dimensions will be super fast  🚀.
+
+```swift
+let imageSize = CGSize(width: yourViewWidth, height: yourViewHeight)
+
+//Set default image size ratio
+self.lazyImage.setCacheSize(imageSize)
+
+self.lazyImage.showWithSpinner(imageView:self, url:imageURL) {
+    (error:LazyImageError?)  in
+}
+```
 
 #### Clearing the cache for specific image URLs
 
 Sometimes you just need to re-download a specific image with the exact same name once.
 
-Clearing the cache
+If you have  a cache size set, clearing the cache will clear images of the specific size ratio
+Clearing the cache:
 ```swift
 let imageURLs:[String] = ["https://someimage.png", "https://someotherimage.png"]
 self.lazyImage.clearCacheForURLs(urls: urls)
 //And you're done
+```
+
+#### Prefetching
+
+You can prefetch an image and save it to be ready for fast displaying.
+
+```swift
+self.lazyImage.prefetchImage(url: "https://someimage.png")
 ```
 
 #### Forget UIImageviews. Just get the UIImage

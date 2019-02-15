@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'LazyImage'
-  s.version          = '6.7.3'
+  s.version          = '6.8.0'
   s.summary          = 'Simple and efficient image lazy loading for iOS written in Swift'
 
 # This description is used to generate tags and improve search results.
@@ -34,8 +34,7 @@ Option for force downloading the same image overriding the cache.
 Option for clearing images from the cache which correspond to specific URLs so they can be re-downloaded once, instead of force downloading them continuously.
 Notifies the caller when the operation is complete providing descreptive error if any.
 Image can be scaled to your specific view dimensions for best performance and reduced memory allocation.
-Image can be zoomed to full screen
-Image can be blurred
+Option for setting the cache image size ratio for saving images to you **needed dimensions for fast display.
                        DESC
 
   s.homepage         = 'https://github.com/lamprosg/LazyImage'

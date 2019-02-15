@@ -144,8 +144,11 @@ extension LazyImage {
         //Check if we have a new size
         var image:UIImage? = fetchedImage
         
-        if let _ = image, let newSize = self.desiredImageSize {
-            image = self.resizeImage(image: image!, targetSize: newSize)
+        if let _ = image,
+            let newSize = self.desiredImageSize,
+            let fetchedImageSize = fetchedImage?.size,
+            !fetchedImageSize.equalTo(newSize) {
+            image = self.resize(image: image!, targetSize: newSize)
         }
         
         //Go to main thread and update the UI

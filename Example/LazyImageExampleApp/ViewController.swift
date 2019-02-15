@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         
         //Clear the cache to test download again
         self.lazyImage.clearCacheForURLs(urls: [imageURL])
-        
+
         //Downlod the image
         self.lazyImage.showWithSpinner(imageView: imageView, url: imageURL) {
             (error:LazyImageError?) in

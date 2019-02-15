@@ -27,9 +27,6 @@ open class LazyImageView: UIImageView {
         }
     }
     
-    /// Wether the image will be forced downloaded
-    open var forceDownload:Bool = false
-    
     ///The LazyImage object
     lazy var lazyImage:LazyImage = LazyImage()
     
@@ -37,36 +34,26 @@ open class LazyImageView: UIImageView {
     
     override open func layoutSubviews() {
         super.layoutSubviews()
-        
+
         if (self.frame.size != CGSize.zero) && !self.loaded {
             self.loaded = true
-            
+
             if let imageURL = self.imageURL {
-                
+
                 //Reset
                 self.image = UIImage()
-                
+
                 let newSize = CGSize(width: self.frame.size.width, height: self.frame.size.height)
-                
-                if self.forceDownload {
-                    
-                    self.lazyImage.showOverrideWithSpinner(imageView:self, url:imageURL, size:newSize) {
-                        
-                        [weak self] (error:LazyImageError?)  in
-                        
-                        if let _ = error {
-                            self?.delegate?.errorDownloadingImage?(url: imageURL)
-                        }
-                    }
-                }
-                else {
-                    self.lazyImage.showWithSpinner(imageView:self, url:imageURL, size:newSize) {
-                        
-                        [weak self] (error:LazyImageError?)  in
-                        
-                        if let _ = error {
-                            self?.delegate?.errorDownloadingImage?(url: imageURL)
-                        }
+
+                //Set default image size ratio
+                self.lazyImage.setCacheSize(newSize)
+
+                self.lazyImage.showWithSpinner(imageView:self, url:imageURL) {
+
+                    [weak self] (error:LazyImageError?)  in
+
+                    if let _ = error {
+                        self?.delegate?.errorDownloadingImage?(url: imageURL)
                     }
                 }
             }

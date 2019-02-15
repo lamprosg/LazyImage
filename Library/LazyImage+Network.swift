@@ -80,6 +80,12 @@ extension LazyImage {
         guard let _ = self.session else {
             return false
         }
+
+        self.showSpinner = false
+        self.forceDownload = false
+        self.spinner = nil
+        self.desiredImageSize = nil
+
         self.session?.invalidateAndCancel()
         self.session = nil
         return true

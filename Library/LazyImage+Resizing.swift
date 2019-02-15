@@ -13,8 +13,8 @@ extension LazyImage {
     
     //MARK: - Resize image
     
-    public func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        
+    func resize(image: UIImage, targetSize: CGSize) -> UIImage {
+
         let horizontalRatio:CGFloat = targetSize.width / image.size.width
         let verticalRatio:CGFloat = targetSize.height / image.size.height
         
