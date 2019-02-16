@@ -164,7 +164,7 @@ self.lazyImage.showOverrideWithSpinner(imageView:self.imageView, url:"http://som
 
 In general showing an image optimized for your view dimensions is the best approach for optimal memory handling . You can achieve this in 2 ways.
 
-* Using the size parameter as shown in the above examples. The size will be used to scale down the image for your specific size. This will happen on the fly, which means the original image is stored in the cache. Resizing will be performed upon load.
+* Using the size parameter as shown in the above examples. The size will be used to scale down the image for your specific size. This will happen on the fly, which means the original image is stored in the cache. Resizing will be performed upon load. Resizing/ image loading happens in a background thread, UI is never blocked. Main thread is for displaying only.
 
 ```swift
 let newSize = CGSize(width: imageViewWidth height: imageViewHeight)
