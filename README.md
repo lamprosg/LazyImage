@@ -15,7 +15,7 @@ LazyImage offers ease of use and complete control over your images by integratin
 * Asynchronous image downloader on a background thread. **Main thread is never blocked**.
 * **Instance based** for better unit testing your code.
 * **Temporary caching** of the downloaded images with automatic OS clean up.
-* Sset a local project image as a **placeholder** or a **spinner** until the actual image is available
+* Set a local project image as a **placeholder** or a **spinner** until the actual image is available
 * If the imageView's size is 0, it sets dimensions to 40x40 prior to the request. This applies to the default UITableViewCells due to the fact when no initial image is present the imageView is hidden.
 
 ### Complete control over your image data
