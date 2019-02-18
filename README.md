@@ -25,7 +25,7 @@ LazyImage offers ease of use and complete control over your images by integratin
 instead of force downloading them continuously.
 * Notifies the caller when the operation is complete providing **descriptive error if any**.
 * Image can be **scaled automatically** to your specific view dimensions for best performance and **reduced memory allocation**.
-* Option for setting the **cache image size** ratio for saving images to your **needed dimensions for fast display**.
+* Set the **cache image size** ratio for saving images. Display them **super fast**  🚀.
 
 
 ### Installation - Cocoapods
