@@ -1,5 +1,5 @@
 PODS:
-  - LazyImage (7.0.0)
+  - LazyImage (7.0.1)
 
 DEPENDENCIES:
   - LazyImage (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  LazyImage: dc1fd8be5b354cf202b4bedd472bd57e6bb6e1d1
+  LazyImage: 4db5288d8660b28e64e60c57f5b5d414af922160
 
 PODFILE CHECKSUM: 1b525437542b575f59c00ecf81225df115a61515
 
