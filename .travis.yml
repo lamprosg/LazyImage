@@ -3,7 +3,7 @@
 # * https://github.com/supermarin/xcpretty#usage
 
 language: objective-c
-osx_image: xcode10.2.1
+osx_image: xcode10.2
 xcode_workspace: Example/LazyImage.xcworkspace
 xcode_scheme: LazyImage-Example
 xcode_destination: platform=iOS Simulator,OS=12.2,name=iPhone Xs
