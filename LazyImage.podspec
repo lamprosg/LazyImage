@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'LazyImage'
-  s.version          = '6.8.0'
+  s.version          = '7.0.0'
   s.summary          = 'Simple and efficient image lazy loading for iOS written in Swift'
 
 # This description is used to generate tags and improve search results.
@@ -42,8 +42,8 @@ Option for setting the cache image size ratio for saving images to you **needed 
   s.license          = { :type => 'Apache Licence, Version 2.0', :file => 'LICENSE' }
   s.author           = { 'Lampros Giampouras' => 'lamprosgiamp@gmail.com' }
   s.source           = { :git => 'https://github.com/lamprosg/LazyImage.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-  s.swift_version    = '4.2'
+  s.social_media_url = 'https://twitter.com/lamprosg'
+  s.swift_version    = '5'
 
   s.ios.deployment_target = '10.0'
 
