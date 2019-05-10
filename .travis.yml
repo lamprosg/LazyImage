@@ -8,6 +8,7 @@ xcode_workspace: Example/LazyImage.xcworkspace
 xcode_scheme: LazyImage-Example
 xcode_destination: platform=iOS Simulator,OS=12.2,name=iPhone Xs
 before_install:
+- pod repo update
 - pod lib lint
 - cd Example
 - pod install
